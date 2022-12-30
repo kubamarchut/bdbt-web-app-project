@@ -5,6 +5,7 @@
     <title>Data page</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
 
 </head>
 
@@ -31,10 +32,19 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
 
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home
+                    </a>
+                </li>
+
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" th:href="@{/languages}">Languages
                         <span class="sr-only">(current)</span>
                     </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/employees}">Employees</a>
                 </li>
 
                 <li class="nav-item">
@@ -57,13 +67,13 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-10 mt-5">
+        <div class="col-md-12 mt-5">
 
             <label style="font-size:30px">Welcome to the data page!</label>
             <div align="center">
                 <h1>Language Records</h1>
 
-                <table border="1" cellpadding="10">
+                <table>
 
                     <thead>
                     <tr>
@@ -76,9 +86,9 @@
 
                     <tbody>
                     <tr th:each="language : ${languageList}">
-                        <td th:text="${language.Nr_jezyka}">ID</td>
-                        <td th:text="${sale.Kod_jezyka}">Language Code</td>
-                        <td th:text="${sale.Nazwa_jezyka}">Language Name</td>
+                        <td th:text="${language.nr_jezyki}">ID</td>
+                        <td th:text="${language.kod_jezyka}">Language Code</td>
+                        <td th:text="${language.nazwa_jezyka}">Language Name</td>
                     </tr>
                     </tbody>
 
