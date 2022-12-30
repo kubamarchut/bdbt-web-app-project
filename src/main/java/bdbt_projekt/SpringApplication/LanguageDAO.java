@@ -33,7 +33,7 @@ public class LanguageDAO {
         return null;
     }
     /* Update – aktualizacja danych */
-    public void update(Language sale) {
+    public void update(Language language) {
     }
     /* Delete – wybrany rekord z danym id */
     public void delete(int id) {
