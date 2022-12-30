@@ -1,10 +1,16 @@
 package bdbt_projekt.SpringApplication;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import java.util.List;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class LanguageDAO {
     /* Import org.springframework.jd....Template */
+    @Autowired
     private JdbcTemplate jdbcTemplate;
     /* Import java.util.List (zawiera info z bazy danych) */
     public LanguageDAO(JdbcTemplate jdbcTemplate) {
