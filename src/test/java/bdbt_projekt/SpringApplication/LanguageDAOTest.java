@@ -4,9 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.xmlunit.validation.Languages;
 
-import java.sql.DriverManager;
 import java.util.Arrays;
 import java.util.List;
 
