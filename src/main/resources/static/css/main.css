@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600&display=swap');
+
+div.row{
+    font-family: 'Comfortaa', cursive;
+}
+div[align="center"] h1{
+    font-family: 'Comfortaa', cursive;
+}
+table{
+    border: none;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: fit-content;
+    max-width: 100%;
+    font-family: 'Comfortaa', cursive;
+}
+table *{
+    border: none;
+}
+table th{
+    background: #B38356;
+    color: #fff;
+}
+table tr:nth-child(2n){
+    background: #E6D6C7;
+}
+table td, table th{
+    padding: 15px;
+}
+
+.meet-team{
+    font-family: 'Comfortaa', cursive;
+    text-align: center;
+    background: #E6D6C7;
+    padding: 40px 0;
+}
+.meet-team h1{
+    margin: 8px 0 16px;
+    font-weight: 600;
+}
+.meet-team > div{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-evenly;
+    padding: 20px 40px;
+}
+.meet-team > div > a{
+    flex: 1 1 0px;
+    min-width: 280px;
+    max-width: 400px;
+}
+.meet-team > div > a:hover{
+    text-decoration: none;
+}
+.meet-team > div > a > div{
+    color: #000;
+    background: #fff;
+    padding: 40px 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 32px -18px #635c51;
+    transition: .3s transform ease-in-out;
+}
+.meet-team > div > a > div:hover{
+    transform: scale(1.05);
+}
+.meet-team > div .img-employee-hero{
+    display: inline-block;
+    background: #21295C;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: .3s border-radius ease-in-out;
+}
+.meet-team > div > a > div:hover .img-employee-hero {
+    border-radius: 25%;
+}
+.meet-team > div > a > div > h3 {
+    font-weight: 600;
+    margin: 24px 0 4px;
+}
+.meet-team > div > a > div > p {
+    margin: 4px 0;
+    color: #63677E;
+}
+.meet-team .languages-list{
+    list-style-type: none;
+    padding-left: 0;
+    margin: .5rem 0;
+
+}
+.meet-team .languages-list > li{
+    display: inline-block;
+    font-size: .75em;
+    display: inline-block;
+    padding: .8em;
+    background: url("/img/language.svg");
+    background-size: cover;
+    background-position: center;
+    transition: .2s transform cubic-bezier(0.59, 0.01, 0.4, 1.63), .2s filter ease-in-out;
+    cursor: pointer;
+}
+.meet-team .languages-list > li:hover{
+    transform: scale(1.1);
+    filter: invert(58%) sepia(11%) saturate(1612%) hue-rotate(348deg) brightness(91%) contrast(92%);
+}
+
+footer {
+    font-family: 'Comfortaa', cursive;
+    text-align: center;
+    background: #333;
+    color: #fff;
+    font-size: .75em;
+    padding: 1.5em 16px 8px;
+}
+
+footer ul{
+    list-style-type: none;
+    padding-left: 0;
+}
+footer h4{
+    font-size: 2.33em;
+    margin: .5em 0;
+}
+footer a{
+    font-size: 1.33em;
+    color: #fff;
+    transition: .2s color ease-in-out;
+}
+footer a:hover{
+    text-decoration: none;
+    color: #E6D6C7;
+}

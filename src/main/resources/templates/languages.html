@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Data page</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
+
+</head>
+
+<body th:style="'background: url(/assets/img/img.png) no-repeat center center fixed;'">
+
+
+<style th:inline="text">s
+    body{
+        background: url([[@{/assets/img/img.png}]])
+        no-repeat center center fixed;
+    }
+</style>
+
+
+<!-- Navigation -->
+<nav th:replace="fragments/nav :: nav('Languages')" ></nav>
+
+
+<!--Using images in page    -->
+<!-- <img th:src="@{/assets/img/img.png}" alt="Image" class="img-fluid"> -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-5">
+
+            <label style="font-size:30px">Welcome to the data page!</label>
+            <div align="center">
+                <h1>Language Records</h1>
+
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Language Code</th>
+                        <th>Language Name</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="language : ${languageList}">
+                        <td th:text="${language.nr_jezyki}">ID</td>
+                        <td th:text="${language.kod_jezyka}">Language Code</td>
+                        <td th:text="${language.nazwa_jezyka}">Language Name</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
+

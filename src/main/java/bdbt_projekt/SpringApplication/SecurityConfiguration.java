@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -33,14 +34,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index").permitAll()
                 .antMatchers("/resources/static/**").permitAll()
                 .antMatchers("/main").authenticated()
+                .antMatchers("/main_admin").access("hasRole('ADMIN')")
+                .antMatchers("/main_user").access("hasRole('USER')")
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/main")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/index")
+                .logoutUrl("/logout")
                 .logoutSuccessUrl("/index")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                 .permitAll();
     }
 }
