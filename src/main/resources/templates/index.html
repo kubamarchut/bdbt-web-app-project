@@ -1,67 +1,17 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Welcome Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-
+    <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
 </head>
 
-<!-- <body th:style="'background: url(/assets/img/img.png) no-repeat center center fixed;'"> -->
-
-
-<!--<style th:inline="text">-->
-<!--    body{-->
-<!--        background: url([[@{/assets/img/img.png}]])-->
-<!--        no-repeat center center fixed;-->
-<!--    }-->
-<!--</style>-->
-
-
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">BDBT Spring Boot Project - Part II</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/languages}">Languages</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/employees}">Employees</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Main</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Login</a></a>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-<!--Using images in page    -->
-<!-- <img th:src="@{/assets/img/img.png}" alt="Image" class="img-fluid"> -->
-
+<nav th:replace="fragments/nav :: nav('Home')"></nav>
 
 <div class="container">
     <div class="row">
@@ -71,6 +21,11 @@
             <div style="font-size:20px">If you want to login, click <a th:href="@{/main}"><b>here</b></a> or in the
                 upper right corner.
             </div>
+            <div sec:authorize="hasRole('USER')">Text visible to user.</div>
+            <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+            <div sec:authorize="isAuthenticated()">Text visible only to authenticated users.</div>
+            <div sec:authentication="name"></div>
+
 
         </div>
     </div>
@@ -105,6 +60,8 @@
 
 </div>-->
 
+<!-- Footer -->
+<footer th:replace="fragments/footer"></footer>
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>

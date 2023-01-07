@@ -1,6 +1,7 @@
 package bdbt_projekt.SpringApplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -25,13 +26,69 @@ public class EmployeeDAO {
 
         return listEmployee;
     }
+    public List<Employee> listAgents(){
+        String sql = "SELECT * FROM PRACOWNICY NATURAL JOIN STANOWISKA WHERE NAZWA_STANOWISKA like \'Agent nieruchomości\'";
+
+        List<Employee> listEmployee = jdbcTemplate.query(sql,
+                BeanPropertyRowMapper.newInstance(Employee.class));
+
+        return listEmployee;
+    }
+    public List<Language> getEmployeesLanguages(int employeesID){
+        String sql = "select nr_jezyki, kod_jezyka, nazwa_jezyka from agenci_nieruchomosci natural join znajomosc_jezykow natural join jezyki where nr_pracownika = \'"+employeesID+"\'";
+
+        List<Language> employeesLanguages = jdbcTemplate.query(sql,
+                BeanPropertyRowMapper.newInstance(Language.class));
+
+        return employeesLanguages;
+    }
     /* Insert – wstawianie nowego wiersza do bazy */
     public void save(Employee employee) {
     }
     /* Read – odczytywanie danych z bazy */
     public Employee get(int id) {
-        return null;
+        Object[] args = {id};
+        String sql = "SELECT * FROM PRACOWNICY WHERE NR_PRACOWNIKA = ?";
+
+        Employee employee = jdbcTemplate.queryForObject(sql, args,
+                BeanPropertyRowMapper.newInstance(Employee.class));
+
+        return employee;
     }
+    public Employee get(String name) {
+        Object[] args = {name.split("-")[0], name.split("-")[1]};
+        String sql = "SELECT * FROM PRACOWNICY NATURAL JOIN AGENCI_NIERUCHOMOSCI WHERE IMIE = ? AND NAZWISKO = ?";
+
+        Employee employee = jdbcTemplate.queryForObject(sql, args,
+                BeanPropertyRowMapper.newInstance(Employee.class));
+
+        return employee;
+    }
+    public boolean checkIfRealEstateAgent(int id){
+        Object[] args = {id};
+        String sql = "SELECT * FROM AGENCI_NIERUCHOMOSCI WHERE NR_PRACOWNIKA = ?";
+
+        try{
+        jdbcTemplate.queryForObject(sql, args, BeanPropertyRowMapper.newInstance(Employee.class));
+        }
+        catch (Exception EmptyResultDataAccessException){
+            return false;
+        }
+        return true;
+    }
+    public boolean checkIfRealEstateAgent(String name){
+        Object[] args = {name.split("-")[0], name.split("-")[1]};
+        String sql = "SELECT * FROM PRACOWNICY NATURAL JOIN AGENCI_NIERUCHOMOSCI WHERE IMIE = ? AND NAZWISKO = ?";
+
+        try{
+            jdbcTemplate.queryForObject(sql, args, BeanPropertyRowMapper.newInstance(Employee.class));
+        }
+        catch (Exception EmptyResultDataAccessException){
+            return false;
+        }
+        return true;
+    }
+
     /* Update – aktualizacja danych */
     public void update(Language sale) {
     }

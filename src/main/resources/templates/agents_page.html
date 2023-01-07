@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Employee data page</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
+
+</head>
+
+<body>
+
+
+<!-- Navigation -->
+<nav th:replace="fragments/nav :: nav('Employees')" ></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-5">
+
+            <label style="font-size:30px">Welcome to the agent's page!</label>
+        </div>
+        <div class="col-md-12">
+            <div>
+                <h1>Witaj! nazywam się <span th:text="${employee.imie + ' ' + employee.nazwisko}"></span>!</h1>
+                <h3>Kontakt:</h3>
+                <p th:text="${employee.nr_telefonu}">Phone number</p>
+                <p th:text="${employee.adres_email}"> E-mail address</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
+

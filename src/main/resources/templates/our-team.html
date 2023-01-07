@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Nasz zespół</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
+
+</head>
+
+<!-- Navigation -->
+<nav th:replace="fragments/nav :: nav('Our team')"></nav>
+
+<!--Using images in page    -->
+<!-- <img th:src="@{/assets/img/img.png}" alt="Image" class="img-fluid"> -->
+<section class="meet-team">
+    <header><h1>Poznaj nasz zespół!</h1></header>
+    <div>
+        <a th:each="employee : ${employeeAgentsList}" th:href="${'/estate-agent/' + employee.nr_pracownika}">
+            <div>
+                <img src="https://images.unsplash.com/photo-1589203832113-de9d078abc30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=squre&fit=crop&w=387&q=80"
+                     class="img-employee-hero">
+                <h3 th:text="${employee.imie + ' ' + employee.nazwisko}">Name</h3>
+                <p>Agent nieruchomości</p>
+                <ul class="languages-list">
+                    <li th:each="employeeLanguages : ${employeeLanguagesList.get(employee.getNr_pracownika())}"
+                        th:text="${employeeLanguages.kod_jezyka}" th:title="${employeeLanguages.nazwa_jezyka}"></li>
+                </ul>
+
+                <!--<p th:text="${employee.nr_telefonu}">Phone number</p>
+                <p th:text="${employee.adres_email}">E-mail address</p>-->
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer th:replace="fragments/footer"></footer>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
+
