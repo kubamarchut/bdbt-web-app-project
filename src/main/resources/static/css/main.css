@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&display=swap');
+
+div[align="center"] h1{
+    font-family: 'Comfortaa', cursive;
+}
+table{
+    border: none;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: fit-content;
+    max-width: 100%;
+    font-family: 'Comfortaa', cursive;
+}
+table *{
+    border: none;
+}
+table th{
+    background: #A27035;
+    color: #fff;
+}
+table tr:nth-child(2n){
+    background: #EEE3D3;
+}
+table td, table th{
+    padding: 15px;
+}

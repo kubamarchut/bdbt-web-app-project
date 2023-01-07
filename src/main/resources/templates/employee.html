@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Employee data page</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
+
+</head>
+
+<body th:style="'background: url(/assets/img/img.png) no-repeat center center fixed;'">
+
+
+<style th:inline="text">s
+    body{
+        background: url([[@{/assets/img/img.png}]])
+        no-repeat center center fixed;
+    }
+</style>
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">BDBT Spring Boot Project - Part II</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/languages}">Languages</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/employees}">Employees
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/main}">Main</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/main}">Login</a></a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!--Using images in page    -->
+<!-- <img th:src="@{/assets/img/img.png}" alt="Image" class="img-fluid"> -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 mt-5">
+
+            <label style="font-size:30px">Welcome to the data page!</label>
+        </div>
+        <div class="col-md-12">
+            <div align="center">
+                <h1>Employee Records</h1>
+
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Lastname</th>
+                        <th>date of birth</th>
+                        <th>gender</th>
+                        <th>PESEL</th>
+                        <th>date of employment</th>
+                        <th>Bank account</th>
+                        <th>Phone number</th>
+                        <th>E-mail address</th>
+                        <th>ID of office</th>
+                        <th>ID of address</th>
+                        <th>ID of position</th>
+
+                    </th>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="employee : ${employeeList}">
+                        <td th:text="${employee.nr_pracownika}">ID</td>
+                        <td th:text="${employee.imie}">Name</td>
+                        <td th:text="${employee.nazwisko}">Lastname</td>
+                        <td th:text="${employee.data_urodzenia}">date of birth</td>
+                        <td th:text="${employee.plec}">gender</td>
+                        <td th:text="${employee.pesel}">PESEL</td>
+                        <td th:text="${employee.data_zatrudnienia}">date of employment</td>
+                        <td th:text="${employee.nr_konta}">Bank account</td>
+                        <td th:text="${employee.nr_telefonu}">Phone number</td>
+                        <td th:text="${employee.adres_email}">E-mail address</td>
+                        <td th:text="${employee.nr_biura}">ID of office</td>
+                        <td th:text="${employee.nr_adresu}">ID of address</td>
+                        <td th:text="${employee.nr_stanowiska}">ID of position</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
+
