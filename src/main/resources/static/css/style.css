@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap');
 *{
     box-sizing: border-box;
-    font-family: 'Comfortaa';
+    font-family: 'Playfair Display', serif;
 }
 body{
     min-height: 100vh;
