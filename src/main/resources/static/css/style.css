@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600&display=swap');
+*{
+    box-sizing: border-box;
+    font-family: 'Comfortaa';
+}
+body{
+    min-height: 100vh;
+    margin: 0;
+}
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 32px 40px;
+    display: flex;
+    justify-content: end;
+}
+nav a{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 6px 12px;
+    color: #fff;
+    font-size: 1.625em;
+    text-decoration: none;
+    border: 3px solid #fff;
+    border-radius: 4px;
+    transition: .2s background ease;
+    backdrop-filter: blur(1px);
+}
+nav a:hover{
+    background: #fff3;
+}
+nav svg{
+    width: 1.2em;
+    height: 1.2em;
+    fill: currentColor;
+}
+nav svg .arrow{
+    transform: translateX(-12.5%);
+    transition: .2s transform ease-in-out;
+}
+
+nav a:hover svg .arrow{
+    transform: translateX(0);
+}
+.slider-wrapper{
+    overflow: hidden;
+}
+.slider{
+    display: flex;
+    width: 400%;
+    height: 100vh;
+    animation: animate 30s ease-in-out infinite;
+}
+.slide-1{
+    background-image: url("../img/1.jpg");
+}
+.slide-2{
+    background-image: url("../img/2.jpg");
+}
+.slide-3{
+    background-image: url("../img/3.jpg");
+}
+.slide-4{
+    background-image: url("../img/4.jpg");
+}
+.slide{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-color: #0006;
+    background-blend-mode: darken;
+}
+.title{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    padding: 0 40px 32px;
+    /*backdrop-filter: blur(1px);*/
+}
+.title h1{
+    font-size: 3em;
+}
+@keyframes animate {
+    0% {
+        transform: translateX( 0);
+    }
+    20% {
+        transform: translateX( 0);
+    }
+    25% {
+        transform: translateX(-25%);
+    }
+    45% {
+        transform: translateX(-25%);
+    }
+    50% {
+        transform: translateX(-50%);
+    }
+    70% {
+        transform: translateX(-50%);
+    }
+    75% {
+        transform: translateX(-75%);
+    }
+    95% {
+        transform: translateX(-75%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+  }
