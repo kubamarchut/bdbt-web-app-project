@@ -25,12 +25,14 @@ input{
 .login-wrapper{
     background: rgba(255,253,253, .65);
     padding: 24px 36px;
-    max-width: calc(100vw - 24px);
+    width: calc(100vw - 64px);
     border-radius: 16px;
 
 }
-@media screen and (min-width: 768px) {
-    width: 30%;
+@media screen and (min-width: 600px) {
+    .login-wrapper{
+        width: 35%;
+    }
 }
 .login-wrapper h1 {
     text-align: center;
