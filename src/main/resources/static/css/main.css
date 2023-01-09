@@ -30,6 +30,11 @@ table tr:nth-child(2n){
 }
 table td, table th{
     padding: 15px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+table td{
+
 }
 
 .meet-team{
@@ -112,6 +117,32 @@ table td, table th{
     filter: invert(58%) sepia(11%) saturate(1612%) hue-rotate(348deg) brightness(91%) contrast(92%);
 }
 
+
+
+.col-choose-wrapper{
+    position: relative;
+    width: 250px;
+    text-align: left;
+}
+.col-choose-wrapper button{
+}
+.col-choose{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    text-align: left;
+    transition: .5s clip-path ease,  .5s visibility ease;
+    clip-path: polygon(0% 0%,100% 0%,100% 0%,0% 0%);
+    visibility: hidden;
+    background: #E6D6C7;
+    box-shadow: 0 0 #000;
+    padding: 4px 8px;
+}
+.col-choose.active{
+    clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
+    visibility: visible;
+}
 footer {
     font-family: 'Comfortaa', cursive;
     text-align: center;
