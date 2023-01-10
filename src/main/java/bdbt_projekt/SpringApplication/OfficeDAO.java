@@ -1,7 +1,6 @@
 package bdbt_projekt.SpringApplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -11,12 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class EmployeeDAO {
+public class OfficeDAO {
     /* Import org.springframework.jd....Template */
     @Autowired
     private JdbcTemplate jdbcTemplate;
     /* Import java.util.List (zawiera info z bazy danych) */
-    public EmployeeDAO(JdbcTemplate jdbcTemplate) {
+    public OfficeDAO(JdbcTemplate jdbcTemplate) {
         super();
         this.jdbcTemplate = jdbcTemplate;
     }

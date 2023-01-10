@@ -8,7 +8,8 @@
     <div align="center">
         <h1>Add new employee</h1>
 
-        <form action="#" th:action="@{/employee/save}" th:object="@{newEmployee}" method="post">
+        <form action="#" th:action="@{/employee/save}" th:object="${newEmployee}" method="post">
+            <table>
             <tr>
                 <td>Name:</td>
                 <td><input type="text" th:field="*{imie}"></td>
@@ -56,13 +57,22 @@
 
             <tr>
                 <td>ID of position:</td>
-                <td><input type="number" th:field="*{nr_stanowiska}"></td>
+                <td>
+                    <select th:field="*{nr_stanowiska}">
+                        <option value="0">Please choose</option>
+                        <option th:each="position : ${positionList}"
+                                th:value="${position.nr_stanowiska}"
+                                th:text="${position.nazwa_stanowiska}"
+                                th:title="${position.opis}"></option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td colspan="2">
                     <button type="submit">save</button>
                 </td>
             </tr>
+            </table>
         </form>
     </div>
 </body>

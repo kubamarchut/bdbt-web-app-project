@@ -1,11 +1,12 @@
 package bdbt_projekt.SpringApplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -13,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +26,8 @@ public class AppController implements WebMvcConfigurer {
     private LanguageDAO dao;
     @Autowired
     private EmployeeDAO daoE;
+    @Autowired
+    private PositionDAO positionDAO;
 
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
@@ -74,10 +76,18 @@ public class AppController implements WebMvcConfigurer {
         @RequestMapping("/employee/new")
         public String showNewEmployeeForm(Model model){
             Employee newEmployee = new Employee();
+            List<Position> positionList = positionDAO.list();
 
             model.addAttribute("newEmployee", newEmployee);
+            model.addAttribute("positionList", positionList);
 
             return "new-employee-form";
+        }
+        @RequestMapping(value = "/employee/save", method = RequestMethod.POST)
+        public String saveEmployee(@ModelAttribute("newEmployee") Employee newEmployee){
+            daoE.save(newEmployee);
+
+            return "redirect:/employee";
         }
         @RequestMapping("/estate-agent/{agentID}")
         public ModelAndView showAgentsPage (@PathVariable(value="agentID") int id) {
