@@ -92,7 +92,7 @@ public class AppController implements WebMvcConfigurer {
         public String saveEmployee(@ModelAttribute("newEmployee") Employee newEmployee){
             daoE.save(newEmployee);
 
-            return "redirect:/employee";
+            return "redirect:/employees";
         }
         @RequestMapping("/estate-agent/{agentID}")
         public ModelAndView showAgentsPage (@PathVariable(value="agentID") int id) {
