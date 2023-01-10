@@ -64,15 +64,20 @@ public class AppController implements WebMvcConfigurer {
             List<Employee> employeeList = daoE.list();
             model.addAttribute("employeeList", employeeList);
 
+            List<Position> positionList = positionDAO.list();
+            HashMap<Integer, Position> positionDictonary = new HashMap<Integer, Position>();
+            positionList.forEach(position -> positionDictonary.put(position.getNr_stanowiska(), position));
+
+            List<Office> officeList = officeDAO.list();
+            HashMap<Integer, Office> officeDict = new HashMap<Integer, Office>();
+            officeList.forEach(office -> officeDict.put(office.getNr_biura(), office));
+
             employeeList = daoE.listAgents();
-            Map<Integer, List> employeesLanguages = new HashMap<Integer, List>();
-            for (Employee employee: employeeList) {
-                List<Language> employeeLanguages = daoE.getEmployeesLanguages(employee.getNr_pracownika());
-                employeesLanguages.put(employee.getNr_pracownika(), employeeLanguages);
-                //System.out.println(Arrays.toString(employeesLanguages.get(employee.getNr_pracownika()).toArray()));
-            }
+
             model.addAttribute("employeeAgentsList", employeeList);
-            model.addAttribute("employeeLanguagesList", employeesLanguages);
+            model.addAttribute("positionList", positionDictonary);
+            model.addAttribute("officeDict", officeDict);
+
 
             return "employee";
         }

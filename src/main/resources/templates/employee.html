@@ -43,6 +43,7 @@
                     <div class="col-choose">
 
                     </div>
+
                 </div>
                 <table>
 
@@ -77,9 +78,11 @@
                         <td th:text="${employee.nr_konta}">Bank account</td>
                         <td th:text="${employee.nr_telefonu}">Phone number</td>
                         <td th:text="${employee.adres_email}">E-mail address</td>
-                        <td th:text="${employee.nr_biura}">ID of office</td>
+                        <td th:text="${officeDict.get(employee.nr_biura).nazwa}">ID of office</td>
                         <td th:text="${employee.nr_adresu}">ID of address</td>
-                        <td th:text="${employee.nr_stanowiska}">ID of position</td>
+                        <td th:text="${positionList.get(employee.nr_stanowiska).nazwa_stanowiska}"
+                            th:title="${positionList.get(employee.nr_stanowiska).opis}"
+                        >ID of position</td>
                     </tr>
                     </tbody>
 
