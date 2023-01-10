@@ -52,7 +52,7 @@
                         <th>Name</th>
                         <th>Lastname</th>
                         <th>date of birth</th>
-                        <th>gender</th>
+                        <th>Sex</th>
                         <th>PESEL</th>
                         <th>date of employment</th>
                         <th>Bank account</th>
@@ -71,7 +71,7 @@
                         <td th:text="${employee.imie}">Name</td>
                         <td th:text="${employee.nazwisko}">Lastname</td>
                         <td th:text="${employee.data_urodzenia}">date of birth</td>
-                        <td th:text="${employee.plec}">gender</td>
+                        <td th:text="${employee.plec}">Sex</td>
                         <td th:text="${employee.pesel}">PESEL</td>
                         <td th:text="${employee.data_zatrudnienia}">date of employment</td>
                         <td th:text="${employee.nr_konta}">Bank account</td>
@@ -84,7 +84,9 @@
                     </tbody>
 
                 </table>
-
+                <a href="/employee/new">
+                    Create new employee
+                </a>
             </div>
         </div>
     </div>

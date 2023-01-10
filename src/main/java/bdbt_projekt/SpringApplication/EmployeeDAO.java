@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -44,6 +46,13 @@ public class EmployeeDAO {
     }
     /* Insert – wstawianie nowego wiersza do bazy */
     public void save(Employee employee) {
+        SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
+        insertActor.withTableName("pracownicy").usingColumns("imie", "nazwisko", "data_urodzenia", "plec",
+                                                                "pesel", "data_zatrudnienia", "nr_konta", "nr_telefonu",
+                                                                "adres_email", "nr_biura", "nr_adresu", "nr_stanowiska");
+
+        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(employee);
+        insertActor.execute(param);
     }
     /* Read – odczytywanie danych z bazy */
     public Employee get(int id) {

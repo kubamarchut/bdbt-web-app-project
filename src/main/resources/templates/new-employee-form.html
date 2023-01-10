@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new employee</title>
+</head>
+<body>
+    <div align="center">
+        <h1>Add new employee</h1>
+
+        <form action="#" th:action="@{/employee/save}" th:object="@{newEmployee}" method="post">
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" th:field="*{imie}"></td>
+            </tr>
+            <tr>
+                <td>Lastname:</td>
+                <td><input type="text" th:field="*{nazwisko}"></td>
+            </tr>
+            <tr>
+                <td>Date of birth</td>
+                <td><input type="date" th:field="*{data_urodzenia}"></td>
+            </tr>
+            <tr>
+                <td>Sex</td>
+                <td><input type="text" th:field="*{plec}"></td>
+            </tr>
+            <tr>
+                <td>PESEL</td>
+                <td><input type="text"  th:field="*{pesel}"></td>
+            </tr>
+            <tr>
+                <td>Data of employment</td>
+                <td><input type="date"  th:field="*{data_zatrudnienia}"></td>
+            </tr>
+            <tr>
+                <td>Bank account</td>
+                <td><input type="text" th:field="*{nr_konta}"></td>
+            </tr>
+            <tr>
+                <td>Phone number</td>
+                <td><input type="text" th:field="*{nr_telefonu}"></td>
+            </tr>
+            <tr>
+                <td>E-mail address</td>
+                <td><input type="text" th:field="*{adres_email}"></td>
+            </tr>
+            <tr>
+                <td>ID of office:</td>
+                <td><input type="number" th:field="*{nr_biura}"></td>
+            </tr>
+            <tr>
+                <td>ID of address:</td>
+                <td><input type="number" th:field="*{nr_adresu}"></td>
+            </tr>
+
+            <tr>
+                <td>ID of position:</td>
+                <td><input type="number" th:field="*{nr_stanowiska}"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">save</button>
+                </td>
+            </tr>
+        </form>
+    </div>
+</body>
+</html>

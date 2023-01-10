@@ -71,6 +71,14 @@ public class AppController implements WebMvcConfigurer {
 
             return "employee";
         }
+        @RequestMapping("/employee/new")
+        public String showNewEmployeeForm(Model model){
+            Employee newEmployee = new Employee();
+
+            model.addAttribute("newEmployee", newEmployee);
+
+            return "new-employee-form";
+        }
         @RequestMapping("/estate-agent/{agentID}")
         public ModelAndView showAgentsPage (@PathVariable(value="agentID") int id) {
             ModelAndView agentsPage = new ModelAndView("agents_page");
