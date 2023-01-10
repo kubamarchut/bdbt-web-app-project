@@ -66,6 +66,9 @@ public class Office {
     public void setNr_adresu(int nr_adresu) {
         this.nr_adresu = nr_adresu;
     }
+    public Office(){
+
+    }
 
     public Office(int nr_biura, String nazwa, Date data_zalozenia, String nr_telefonu, String aderes_email, int procent_z_prowizji, int nr_adresu) {
         this.nr_biura = nr_biura;

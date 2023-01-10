@@ -19,88 +19,36 @@ public class OfficeDAO {
         super();
         this.jdbcTemplate = jdbcTemplate;
     }
-    public List<Employee> list(){
-        String sql = "SELECT * FROM PRACOWNICY";
+    public List<Office> list(){
+        String sql = "SELECT * FROM BIURA";
 
-        List<Employee> listEmployee = jdbcTemplate.query(sql,
-                BeanPropertyRowMapper.newInstance(Employee.class));
+        List<Office> listOffices = jdbcTemplate.query(sql,
+                BeanPropertyRowMapper.newInstance(Office.class));
 
-        return listEmployee;
+        return listOffices;
     }
-    public List<Employee> listAgents(){
-        String sql = "SELECT * FROM PRACOWNICY NATURAL JOIN STANOWISKA WHERE NAZWA_STANOWISKA like \'Agent nieruchomości\'";
 
-        List<Employee> listEmployee = jdbcTemplate.query(sql,
-                BeanPropertyRowMapper.newInstance(Employee.class));
-
-        return listEmployee;
-    }
-    public List<Language> getEmployeesLanguages(int employeesID){
-        String sql = "select nr_jezyki, kod_jezyka, nazwa_jezyka from agenci_nieruchomosci natural join znajomosc_jezykow natural join jezyki where nr_pracownika = \'"+employeesID+"\'";
-
-        List<Language> employeesLanguages = jdbcTemplate.query(sql,
-                BeanPropertyRowMapper.newInstance(Language.class));
-
-        return employeesLanguages;
-    }
     /* Insert – wstawianie nowego wiersza do bazy */
-    public void save(Employee employee) {
-
-        System.out.print(employee);
+    public void save(Office office) {
         SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
-        insertActor.withTableName("pracownicy").usingColumns("imie", "nazwisko", "data_urodzenia", "plec",
-                                                                "pesel", "data_zatrudnienia", "nr_konta", "nr_telefonu",
-                                                                "adres_email", "nr_biura", "nr_adresu", "nr_stanowiska");
+        insertActor.withTableName("BIURA").usingColumns("nazwa_stanowiska", "opis");
 
-        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(employee);
+        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(office);
         insertActor.execute(param);
     }
     /* Read – odczytywanie danych z bazy */
-    public Employee get(int id) {
+    public Office get(int id) {
         Object[] args = {id};
-        String sql = "SELECT * FROM PRACOWNICY WHERE NR_PRACOWNIKA = ?";
+        String sql = "SELECT * FROM BIURA WHERE NR_BIURA = ?";
 
-        Employee employee = jdbcTemplate.queryForObject(sql, args,
-                BeanPropertyRowMapper.newInstance(Employee.class));
+        Office office = jdbcTemplate.queryForObject(sql, args,
+                BeanPropertyRowMapper.newInstance(Office.class));
 
-        return employee;
-    }
-    public Employee get(String name) {
-        Object[] args = {name.split("-")[0], name.split("-")[1]};
-        String sql = "SELECT * FROM PRACOWNICY NATURAL JOIN AGENCI_NIERUCHOMOSCI WHERE IMIE = ? AND NAZWISKO = ?";
-
-        Employee employee = jdbcTemplate.queryForObject(sql, args,
-                BeanPropertyRowMapper.newInstance(Employee.class));
-
-        return employee;
-    }
-    public boolean checkIfRealEstateAgent(int id){
-        Object[] args = {id};
-        String sql = "SELECT * FROM AGENCI_NIERUCHOMOSCI WHERE NR_PRACOWNIKA = ?";
-
-        try{
-        jdbcTemplate.queryForObject(sql, args, BeanPropertyRowMapper.newInstance(Employee.class));
-        }
-        catch (Exception EmptyResultDataAccessException){
-            return false;
-        }
-        return true;
-    }
-    public boolean checkIfRealEstateAgent(String name){
-        Object[] args = {name.split("-")[0], name.split("-")[1]};
-        String sql = "SELECT * FROM PRACOWNICY NATURAL JOIN AGENCI_NIERUCHOMOSCI WHERE IMIE = ? AND NAZWISKO = ?";
-
-        try{
-            jdbcTemplate.queryForObject(sql, args, BeanPropertyRowMapper.newInstance(Employee.class));
-        }
-        catch (Exception EmptyResultDataAccessException){
-            return false;
-        }
-        return true;
+        return office;
     }
 
     /* Update – aktualizacja danych */
-    public void update(Language sale) {
+    public void update(Position position) {
     }
     /* Delete – wybrany rekord z danym id */
     public void delete(int id) {

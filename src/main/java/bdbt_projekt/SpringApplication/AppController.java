@@ -28,6 +28,9 @@ public class AppController implements WebMvcConfigurer {
     private EmployeeDAO daoE;
     @Autowired
     private PositionDAO positionDAO;
+    @Autowired
+    private OfficeDAO officeDAO;
+
 
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
@@ -77,9 +80,11 @@ public class AppController implements WebMvcConfigurer {
         public String showNewEmployeeForm(Model model){
             Employee newEmployee = new Employee();
             List<Position> positionList = positionDAO.list();
+            List<Office> officeList = officeDAO.list();
 
             model.addAttribute("newEmployee", newEmployee);
             model.addAttribute("positionList", positionList);
+            model.addAttribute("officeList", officeList);
 
             return "new-employee-form";
         }
