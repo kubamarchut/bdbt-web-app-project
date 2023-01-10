@@ -169,3 +169,10 @@ footer a:hover{
     text-decoration: none;
     color: #E6D6C7;
 }
+
+
+mark{
+    padding: .2em 0;
+    color: #fff;
+    background: #DB5ABA;
+}
