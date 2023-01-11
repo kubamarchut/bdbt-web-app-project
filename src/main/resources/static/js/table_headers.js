@@ -2,7 +2,7 @@ const colChooser = document.querySelector("div.col-choose");
 const colChooserBTN = colChooser.parentElement.querySelector("button");
 const tableRows = document.querySelectorAll("tr");
 
-colChooserBTN.addEventListener('click', ()=>{colChooser.classList.toggle("active")});
+colChooserBTN.addEventListener('click', ()=>{colChooser.parentElement.classList.toggle("active")});
 
 let tableHeaders = document.querySelector("tr").querySelectorAll("th");
 tableHeaders = Array.prototype.slice.call(tableHeaders);
@@ -12,26 +12,35 @@ tableHeaders.forEach((item, index, arr) => {
     arr[index] = item.textContent;
 })
 tableHeaders.forEach((item) => {
-    let linebreak = document.createElement("br");
     let id = item.replaceAll(" ", "");
     let newCheckBox = document.createElement("input");
     newCheckBox.type = "checkbox";
     newCheckBox.checked = true;
     newCheckBox.id = id;
     newCheckBox.value = item;
+    newCheckBox.classList.add("custom-checkbox");
     newCheckBox.addEventListener("change", hideShowCol);
 
     let newLabel = document.createElement("label");
     newLabel.htmlFor = id;
-    newLabel.innerHTML = item;
+    newLabel.innerHTML = '<span class="checkbox"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path class="tick" d="m4.2 8 2.53 2.54 5.08-5.08" fill="none" stroke-linecap="round"stroke-linejoin="round" stroke="#fff" stroke-width="1.6"/> </svg> </span>'
+    newLabel.innerHTML += item;
 
     colChooser.appendChild(newCheckBox);
-    colChooser.appendChild(linebreak);
     colChooser.appendChild(newLabel);
-    colChooser.appendChild(linebreak);
 })
-
+function onTogglePress(e){
+    if(e.target.checked){
+        e.target.classList.add("check");
+        e.target.classList.remove("unCheck");
+    }
+    else{
+        e.target.classList.remove("check");
+        e.target.classList.add("unCheck");
+    }
+}
 function hideShowCol(e){
+    onTogglePress(e);
     let index = tableHeaders.indexOf(e.target.value) + 1;
     tableRows.forEach((item) => {
         let hidingCol = item.querySelector(":nth-child("+index+")");

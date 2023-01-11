@@ -1,0 +1,76 @@
+/* for checkbox input*/
+input[type="checkbox"].custom-checkbox{
+    position: absolute;
+    left: -9999rem;
+}
+
+input[type="checkbox"].custom-checkbox + label{
+    display: flex;
+    font-size: 1em;
+    gap: .83em;
+    line-height: 1.35;
+}
+input[type="checkbox"].custom-checkbox + label > span.checkbox{
+    display: inline-block;
+    position: relative;
+    flex: 0 0 1.19em;
+    width: 1.19em;
+    height: 1.19em;
+    border: max(.1em, 1px) currentColor solid;
+    border-radius: .425em;
+    background: transparent;
+    overflow: hidden;
+    transition: border-color .1s 0s ease, background .1s 0s ease;
+}
+input[type="checkbox"].custom-checkbox + label > span.checkbox > *{
+    position: relative;
+    z-index: 2;
+}
+input[type="checkbox"].custom-checkbox + label > span.checkbox::after{
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background: #B38356;
+    border-radius: 50%;
+    transform: scale(.25);
+    opacity: 0;
+    transition: .25s opacity ease, .5s transform ease;
+    z-index: 1;
+}
+input[type="checkbox"]:checked.custom-checkbox + label > span.checkbox{
+    transition: border-color .1s .1s ease, background .1s .125s ease;
+    border-color: #B38356;
+    background: #B38356;
+}
+input[type="checkbox"]:checked.custom-checkbox + label > span.checkbox::after{
+    transition: .2s opacity ease, .2s transform ease;
+    transform: scale(1.2);
+    opacity: 1;
+}
+input[type="checkbox"].custom-checkbox + label > span.checkbox .tick{
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    transition: stroke-dashoffset 0s 0s ease-out;
+}
+input[type="checkbox"]:checked.custom-checkbox + label > span.checkbox .tick{
+    stroke-dashoffset: 35;
+    transition: stroke-dashoffset .12s .175s ease-in;
+}
+input[type="checkbox"].custom-checkbox:focus-visible + label > span.checkbox{
+    outline: 2px #292D32 solid;
+    outline-offset: 2px;
+}
+input[type="checkbox"]:disabled.custom-checkbox + label{
+    color: #b3b3b3;
+}
+input[type="checkbox"]:disabled.custom-checkbox + label > span.checkbox{
+    background: #eee;
+}
+input[type="checkbox"]:disabled:checked.custom-checkbox + label > span.checkbox{
+    background: #F5BE9A;
+    border-color: #F5BE9A;
+}
+input[type="checkbox"]:disabled:checked.custom-checkbox + label > span.checkbox::after{
+    background: #F5BE9A;
+}
