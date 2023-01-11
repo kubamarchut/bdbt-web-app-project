@@ -1,14 +1,18 @@
 package bdbt_projekt.SpringApplication;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Employee {
     private int nr_pracownika;
     private String imie;
     private String nazwisko;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date data_urodzenia;
     private String plec;
     private String pesel;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date data_zatrudnienia;
     private String nr_konta;
     private String nr_telefonu;

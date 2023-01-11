@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap');
+*{
+    box-sizing: border-box;
+    font-family: 'Playfair Display', serif;
+}
+body{
+    min-height: 100vh;
+    margin: 0;
+    background: url("../img/login-bg.png");
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    place-items: center;
+}
+input{
+    border: none;
+    padding: 8px 12px;
+    width: 100%;
+    margin: 4px 0 16px;
+    font-size: 1.1em;
+    background: rgba(217, 217, 217, .6);
+    border-radius: 4px;
+
+}
+.login-wrapper{
+    background: rgba(255,253,253, .65);
+    padding: 24px 36px;
+    width: calc(100vw - 64px);
+    border-radius: 16px;
+
+}
+@media screen and (min-width: 600px) {
+    .login-wrapper{
+        width: 35%;
+    }
+}
+.login-wrapper h1 {
+    text-align: center;
+}
+button[type="submit"]{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: 100%;
+    padding: 8px 12px;
+    color: #fff;
+    font-size: 1.2em;
+    text-decoration: none;
+    border: 3px solid #fff;
+    border: none;
+    border-radius: 4px;
+    transition: .2s background ease;
+    backdrop-filter: blur(1px);
+    background: #000;
+
+}
+button[type="submit"]:hover{
+    background: #000c;
+}
+button[type="submit"] svg{
+    width: 1.6em;
+    height: 1.6em;
+    fill: currentColor;
+}
+button[type="submit"] svg .ani{
+    transform: scaleX(1);
+    transition: .35s transform ease-in-out;
+    transform-origin: 256px;
+}
+
+button[type="submit"]:hover svg .ani{
+    transform: scaleX(-1);
+}

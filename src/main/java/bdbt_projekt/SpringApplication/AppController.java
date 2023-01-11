@@ -1,11 +1,12 @@
 package bdbt_projekt.SpringApplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -13,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +26,11 @@ public class AppController implements WebMvcConfigurer {
     private LanguageDAO dao;
     @Autowired
     private EmployeeDAO daoE;
+    @Autowired
+    private PositionDAO positionDAO;
+    @Autowired
+    private OfficeDAO officeDAO;
+
 
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
@@ -41,6 +46,7 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/employees").setViewName("employee");
         registry.addViewController("/nasz-zespol").setViewName("our-team");
         registry.addViewController("/demo").setViewName("home-demo");
+        registry.addViewController("/login-demo").setViewName("login-demo");
     }
     @Controller
     public class DashboardController
@@ -58,17 +64,40 @@ public class AppController implements WebMvcConfigurer {
             List<Employee> employeeList = daoE.list();
             model.addAttribute("employeeList", employeeList);
 
+            List<Position> positionList = positionDAO.list();
+            HashMap<Integer, Position> positionDictonary = new HashMap<Integer, Position>();
+            positionList.forEach(position -> positionDictonary.put(position.getNr_stanowiska(), position));
+
+            List<Office> officeList = officeDAO.list();
+            HashMap<Integer, Office> officeDict = new HashMap<Integer, Office>();
+            officeList.forEach(office -> officeDict.put(office.getNr_biura(), office));
+
             employeeList = daoE.listAgents();
-            Map<Integer, List> employeesLanguages = new HashMap<Integer, List>();
-            for (Employee employee: employeeList) {
-                List<Language> employeeLanguages = daoE.getEmployeesLanguages(employee.getNr_pracownika());
-                employeesLanguages.put(employee.getNr_pracownika(), employeeLanguages);
-                //System.out.println(Arrays.toString(employeesLanguages.get(employee.getNr_pracownika()).toArray()));
-            }
+
             model.addAttribute("employeeAgentsList", employeeList);
-            model.addAttribute("employeeLanguagesList", employeesLanguages);
+            model.addAttribute("positionList", positionDictonary);
+            model.addAttribute("officeDict", officeDict);
+
 
             return "employee";
+        }
+        @RequestMapping("/employee/new")
+        public String showNewEmployeeForm(Model model){
+            Employee newEmployee = new Employee();
+            List<Position> positionList = positionDAO.list();
+            List<Office> officeList = officeDAO.list();
+
+            model.addAttribute("newEmployee", newEmployee);
+            model.addAttribute("positionList", positionList);
+            model.addAttribute("officeList", officeList);
+
+            return "new-employee-form";
+        }
+        @RequestMapping(value = "/employee/save", method = RequestMethod.POST)
+        public String saveEmployee(@ModelAttribute("newEmployee") Employee newEmployee){
+            daoE.save(newEmployee);
+
+            return "redirect:/employees";
         }
         @RequestMapping("/estate-agent/{agentID}")
         public ModelAndView showAgentsPage (@PathVariable(value="agentID") int id) {

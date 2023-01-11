@@ -26,9 +26,9 @@ public class MyErrorController implements ErrorController {
                 return "errors/504";
             }
             else {
-                return "errors/other";
+                return "errors/others";
             }
         }
-        return "errors/other";
+        return "errors/others";
     }
 }

@@ -33,9 +33,15 @@
         <div class="col-md-12 mt-5">
 
             <label style="font-size:30px">Welcome to the data page!</label>
-            <div align="center">
+            <div align="left">
                 <h1>Language Records</h1>
+                <div class="col-choose-wrapper">
+                    <button>show/hide columns</button>
 
+                    <div class="col-choose">
+
+                    </div>
+                </div>
                 <table>
 
                     <thead>
@@ -69,6 +75,7 @@
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/table_headers.js}"></script>
 
 </body>
 </html>
