@@ -43,7 +43,7 @@ public class AppController implements WebMvcConfigurer {
 
         registry.addViewController("/languages").setViewName("languages");
         registry.addViewController("/data").setViewName("languages");
-        registry.addViewController("/employees").setViewName("employee");
+        registry.addViewController("/employees").setViewName("admin/employees");
         registry.addViewController("/nasz-zespol").setViewName("our-team");
     }
     @Controller
@@ -76,8 +76,7 @@ public class AppController implements WebMvcConfigurer {
             model.addAttribute("positionList", positionDictonary);
             model.addAttribute("officeDict", officeDict);
 
-
-            return "employee";
+            return "admin/employees";
         }
         @RequestMapping("/employee/new")
         public String showNewEmployeeForm(Model model){
