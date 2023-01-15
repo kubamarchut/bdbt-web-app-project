@@ -36,7 +36,31 @@ table td, table th{
 table td{
 
 }
+section.add-new-employee-wrapper{
+    display: block;
+    text-align: center;
+}
+a.hero-link{
+    display: inline-block;
+    margin: 20px auto 40px;
+    padding: 4px 20px;
+    text-align: center;
+    color: #fff;
+    background: #B38356;
+    transition: .2s background ease-in-out;
+}
+a.hero-link span{
+    vertical-align: middle;
+}
+a.hero-link::before{
+    content: '+';
+    font-size: 2em;
+    vertical-align: middle;
 
+}
+a.hero-link:hover{
+    background: #705336;
+}
 .meet-team{
     font-family: 'Comfortaa', cursive;
     text-align: center;
@@ -118,10 +142,12 @@ table td{
 }
 
 
-
+.control-panel{
+    display: flex;
+    justify-content: space-between;
+}
 .col-choose-wrapper{
     position: relative;
-    width: 250px;
     text-align: left;
     transition: .2s filter ease-in-out;
 }
@@ -141,13 +167,26 @@ table td{
     visibility: hidden;
     background: #E6D6C7;
     box-shadow: 0 0 #000;
-    padding: 4px 8px;
+    padding: 8px 12px;
+    min-width: max-content;
 
 }
 .col-choose-wrapper.active .col-choose{
     clip-path: polygon(0% 0%,100% 0%,100% 100%,0% 100%);
     visibility: visible;
 }
+.row-search{
+    display: flex;
+    align-items: center;
+}
+
+.row-search > span{
+    margin-right: 8px;
+}
+.row-search select{
+    height: 100%;
+}
+
 footer {
     font-family: 'Comfortaa', cursive;
     text-align: center;
