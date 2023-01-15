@@ -1,84 +1,36 @@
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Login Page</title>
-
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link th:rel="stylesheet" th:href="@{/css/login-page.css} "/>
+  <title>Login demo</title>
 </head>
 <body>
+  <div class="login-wrapper">
+    <h1>Login</h1>
+    <form method="post" th:action="@{/login}">
+    <label for="login">Login</label><br>
+    <input type="text" id="login" name="username"><br>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">BDBT Spring Boot Project - Part II</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/index}">Home</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/languages}">Languages</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/employees}">Employees</a>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Login
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-
-            </ul>
-        </div>
+    <label for="password">Hasło</label><br>
+    <input type="password" id="password" name="password"><br>
+    <div th:if="${param.error}" style="color:red; margin-bottom:15px">
+      ERROR: Invalid username or password!
     </div>
-</nav>
+    <button type="submit">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+        <g fill-rule="evenodd">
+          <path d="M192.5 373.335c0-28.996 23.504-52.5 52.5-52.5h210c28.992 0 52.5 23.504 52.5 52.5v140c0 28.992-23.508 52.5-52.5 52.5H245c-28.996 0-52.5-23.508-52.5-52.5v-140m52.5-17.5c-9.664 0-17.5 7.836-17.5 17.5v140c0 9.664 7.836 17.5 17.5 17.5h210c9.664 0 17.5-7.836 17.5-17.5v-140c0-9.664-7.836-17.5-17.5-17.5H245"/>
+          <path class="ani" d="M239.17 244.995c0-61.211 49.621-110.83 110.83-110.83 61.209 0 110.83 49.621 110.83 110.83v44.181c0 9.664-7.836 17.5-17.5 17.5s-17.5-7.836-17.5-17.5v-44.181c0-41.879-33.949-75.832-75.832-75.832-41.883 0-75.832 33.953-75.832 75.832v93.336c0 9.664-7.836 17.5-17.5 17.5-9.668 0-17.5-7.836-17.5-17.5l.004-93.336"/>
+          <path d="M350 391.67a28.111 28.111 0 0 0-28.112 28.112 28.112 28.112 0 0 0 13.97 24.263v36.814A14.11 14.11 0 0 0 350 494.999a14.11 14.11 0 0 0 14.142-14.14v-36.822a28.112 28.112 0 0 0 13.97-24.255A28.112 28.112 0 0 0 350 391.67s0 0 0 0" style="opacity:1;stroke-linejoin:round;vector-effect:none;stroke-opacity:1;fill-opacity:1;paint-order:normal;stroke-dashoffset:0;stroke:#000;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:15.00000033;fill:#fff"/>
+        </g>
+      </svg>
+      <span>Log in</span>
+    </button>
+    </form>
 
-
-<div class="container">
-
-    <div class="row">
-        <div class="col-md-4 mt-5">
-
-            <form method="post" th:action="@{/login}">
-
-                <div class="form-group">
-                    <label for="login">Login:</label>
-                    <input id="login" type="text" placeholder="Enter login" autocomplete="off" class="form-control" name="username"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input id="password" type="password" placeholder="Enter your password" autocomplete="off" class="form-control" name="password"/>
-                </div>
-
-                <div th:if="${param.error}" style="color:red; margin-bottom:15px">
-                    ERROR: Invalid username or password!
-                </div>
-
-                <button class="btn btn-primary" type="submit" value="Sign In">Login</button>
-            </form>
-
-
-
-        </div>
-    </div>
-</div>
-
-
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
+  </div>
 </body>
 </html>
