@@ -145,6 +145,8 @@ a.hero-link:hover{
 .control-panel{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 6px;
 }
 .col-choose-wrapper{
     position: relative;
@@ -178,10 +180,14 @@ a.hero-link:hover{
 .row-search{
     display: flex;
     align-items: center;
+    margin-left: auto;
 }
 
 .row-search > span{
     margin-right: 8px;
+}
+.row-search > input{
+    width: 160px
 }
 .row-search select{
     height: 100%;
