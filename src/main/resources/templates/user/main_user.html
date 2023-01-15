@@ -12,7 +12,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-        <a class="navbar-brand" href="/">BDBT Spring Boot Project - Part II</a>
+        <a class="navbar-brand" href="/">Domy i domki</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -26,21 +26,17 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/languages}">Languages</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/employees}">Employees</a>
+                    <a class="nav-link" th:href="@{/employees/}">Moje dane</a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Main
+                    <a class="nav-link" href="#">Główna
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b
+                    <a class="nav-link" th:inline="text" style="color:lightskyblue;">Jesteś zalogowany jako <b
                             style="text-transform:capitalize">[[${#httpServletRequest.remoteUser}]]</b></a>
                 </li>
 
@@ -54,13 +50,13 @@
 
         <div class="col-md-10 mt-5">
                 <div class="form-group">
-                    <label style="font-size:30px" th:inline="text">Welcome <a
+                    <label style="font-size:30px" th:inline="text">Witaj <a
                             style="color:lightskyblue; text-transform:capitalize"><b>[[${#httpServletRequest.remoteUser}]]</b></a>
-                        to the main page!</label>
-                    <div style="font-size:20px">If you want to logout, click "Logout" button under this text.</div>
+                        na stronie głównej</label>
+                    <div style="font-size:20px">Jeśli chcesz się wylogować kliknij na przycisk poniżej</div>
                 </div>
 
-                <a href="/logout" class="btn btn-primary" onclick="successfullyLogout()">Logout</a>
+                <a href="/logout" class="btn btn-primary" onclick="successfullyLogout()">Wyloguj</a>
         </div>
 
     </div>
