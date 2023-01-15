@@ -53,7 +53,6 @@
     <div class="row">
 
         <div class="col-md-10 mt-5">
-            <form method="post" th:action="@{/index}">
                 <div class="form-group">
                     <label style="font-size:30px" th:inline="text">Welcome <a
                             style="color:lightskyblue; text-transform:capitalize"><b>[[${#httpServletRequest.remoteUser}]]</b></a>
@@ -61,9 +60,9 @@
                     <div style="font-size:20px">If you want to logout, click "Logout" button under this text.</div>
                 </div>
 
-                <button class="btn btn-primary" type="submit" onclick="successfullyLogout()" value="Sign Out">Logout
-                </button>
-            </form>
+                <a href="/logout" class="btn btn-primary" onclick="successfullyLogout()">Logout</a>
+
+                <a href="/employees">Show employees</a>
         </div>
 
     </div>
