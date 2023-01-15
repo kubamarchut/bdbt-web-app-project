@@ -2,7 +2,6 @@ package bdbt_projekt.SpringApplication;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.OneToOne;
 import java.util.Date;
 
 public class Employee {

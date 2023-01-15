@@ -21,7 +21,9 @@ public class EmployeeDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
     public List<Employee> list(){
-        String sql = "SELECT * FROM PRACOWNICY NATURAL JOIN STANOWISKA";
+        String sql = "SELECT * FROM PRACOWNICY NATURAL JOIN STANOWISKA NATURAL JOIN (select nr_biura, nazwa, " +
+                "data_zalozenia, nr_telefonu as nr_telefonu_biura, adres_email as adres_email_biura, " +
+                "procent_z_prowizji, nr_adresu as nr_adresu_biura from biura) ORDER BY NR_PRACOWNIKA";
 
         List<Employee> listEmployee = jdbcTemplate.query(sql,
                 (rs, arg1) -> {
@@ -44,7 +46,7 @@ public class EmployeeDAO {
                     position.setNr_stanowiska(rs.getInt("nr_stanowiska"));
                     position.setNazwa_stanowiska(rs.getString("nazwa_stanowiska"));
                     position.setOpis(rs.getString("opis"));
-/*
+
                     office.setNr_biura(rs.getInt("nr_biura"));
                     office.setNazwa(rs.getString("nazwa"));
                     office.setData_zalozenia(rs.getDate("data_zalozenia"));
@@ -52,9 +54,9 @@ public class EmployeeDAO {
                     office.setAdres_email(rs.getString("adres_email"));
                     office.setProcent_z_prowizji(rs.getInt("procent_z_prowizji"));
                     office.setNr_adresu(rs.getInt("nr_adresu"));
-*/
+
                     employee.setStanowisko(position);
-                    //                  employee.setBiuro(office);
+                    employee.setBiuro(office);
 
                     return employee;
                 });
