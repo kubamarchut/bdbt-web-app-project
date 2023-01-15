@@ -7,7 +7,7 @@ public class Office {
     private String nazwa;
     private Date data_zalozenia;
     private String nr_telefonu;
-    private String aderes_email;
+    private String adres_email;
     private int procent_z_prowizji;
     private int nr_adresu;
 
@@ -43,12 +43,12 @@ public class Office {
         this.nr_telefonu = nr_telefonu;
     }
 
-    public String getAderes_email() {
-        return aderes_email;
+    public String getAdres_email() {
+        return adres_email;
     }
 
-    public void setAderes_email(String aderes_email) {
-        this.aderes_email = aderes_email;
+    public void setAdres_email(String adres_email) {
+        this.adres_email = adres_email;
     }
 
     public int getProcent_z_prowizji() {
@@ -70,12 +70,12 @@ public class Office {
 
     }
 
-    public Office(int nr_biura, String nazwa, Date data_zalozenia, String nr_telefonu, String aderes_email, int procent_z_prowizji, int nr_adresu) {
+    public Office(int nr_biura, String nazwa, Date data_zalozenia, String nr_telefonu, String adres_email, int procent_z_prowizji, int nr_adresu) {
         this.nr_biura = nr_biura;
         this.nazwa = nazwa;
         this.data_zalozenia = data_zalozenia;
         this.nr_telefonu = nr_telefonu;
-        this.aderes_email = aderes_email;
+        this.adres_email = adres_email;
         this.procent_z_prowizji = procent_z_prowizji;
         this.nr_adresu = nr_adresu;
     }

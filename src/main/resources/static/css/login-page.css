@@ -70,6 +70,6 @@ button[type="submit"] svg .ani{
     transform-origin: 256px;
 }
 
-button[type="submit"]:hover svg .ani{
+button[type="submit"]:hover svg .ani, button[type="submit"]:focus-within svg .ani{
     transform: scaleX(-1);
 }

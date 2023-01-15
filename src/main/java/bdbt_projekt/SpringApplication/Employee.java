@@ -19,6 +19,8 @@ public class Employee {
     private String adres_email;
     private int nr_biura;
     private int nr_adresu;
+    private Position stanowisko;
+    private Office biuro;
     private int nr_stanowiska;
 
     public int getNr_pracownika() {
@@ -101,14 +103,6 @@ public class Employee {
         this.adres_email = adres_email;
     }
 
-    public int getNr_biura() {
-        return nr_biura;
-    }
-
-    public void setNr_biura(int nr_biura) {
-        this.nr_biura = nr_biura;
-    }
-
     public int getNr_adresu() {
         return nr_adresu;
     }
@@ -116,19 +110,34 @@ public class Employee {
     public void setNr_adresu(int nr_adresu) {
         this.nr_adresu = nr_adresu;
     }
-
+    public void setStanowisko(Position stanowisko) {
+        this.stanowisko = stanowisko;
+        this.nr_stanowiska = stanowisko.getNr_stanowiska();
+    }
+    public Position getStanowisko() {
+        return stanowisko;
+    }
     public int getNr_stanowiska() {
-        return nr_stanowiska;
+        return stanowisko.getNr_stanowiska();
+    }
+    public void setBiuro(Office biuro) {
+        this.biuro = biuro;
+        this.nr_biura = biuro.getNr_biura();
+    }
+    public Office getBiuro() {
+        return this.biuro;
+    }
+    public int getNr_biura() {
+        return this.biuro.getNr_biura();
     }
 
-    public void setNr_stanowiska(int nr_stanowiska) {
-        this.nr_stanowiska = nr_stanowiska;
-    }
+
+
 
     public Employee(){
     }
 
-    public Employee(int nr_pracownika, String imie, String nazwisko, Date data_urodzenia, String plec, String pesel, Date data_zatrudnienia, String nr_konta, String nr_telefonu, String adres_email, int nr_biura, int nr_adresu, int nr_stanowiska) {
+    public Employee(int nr_pracownika, String imie, String nazwisko, Date data_urodzenia, String plec, String pesel, Date data_zatrudnienia, String nr_konta, String nr_telefonu, String adres_email, Office biuro, int nr_adresu, Position stanowisko) {
         this.nr_pracownika = nr_pracownika;
         this.imie = imie;
         this.nazwisko = nazwisko;
@@ -139,9 +148,11 @@ public class Employee {
         this.nr_konta = nr_konta;
         this.nr_telefonu = nr_telefonu;
         this.adres_email = adres_email;
-        this.nr_biura = nr_biura;
+        this.biuro = biuro;
+        this.nr_biura = biuro.getNr_biura();
         this.nr_adresu = nr_adresu;
-        this.nr_stanowiska = nr_stanowiska;
+        this.stanowisko = stanowisko;
+        this.nr_stanowiska = stanowisko.getNr_stanowiska();
     }
 
     @Override
@@ -159,7 +170,7 @@ public class Employee {
                 ", adres_email='" + adres_email + '\'' +
                 ", nr_biura=" + nr_biura +
                 ", nr_adresu=" + nr_adresu +
-                ", nr_stanowiska=" + nr_stanowiska +
+                ", stanowisko=" + stanowisko +
                 '}';
     }
 }

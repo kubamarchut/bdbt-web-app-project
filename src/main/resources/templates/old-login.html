@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Main Admin Page</title>
+    <title>Login Page</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 
@@ -34,14 +34,9 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Main
+                    <a class="nav-link" href="#">Login
                         <span class="sr-only">(current)</span>
                     </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b
-                            style="text-transform:capitalize">[[${#httpServletRequest.remoteUser}]]</b></a>
                 </li>
 
             </ul>
@@ -49,22 +44,34 @@
     </div>
 </nav>
 
-<div class="container">
-    <div class="row">
 
-        <div class="col-md-10 mt-5">
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4 mt-5">
+
+            <form method="post" th:action="@{/login}">
+
                 <div class="form-group">
-                    <label style="font-size:30px" th:inline="text">Welcome <a
-                            style="color:lightskyblue; text-transform:capitalize"><b>[[${#httpServletRequest.remoteUser}]]</b></a>
-                        to the main page!</label>
-                    <div style="font-size:20px">If you want to logout, click "Logout" button under this text.</div>
+                    <label for="login">Login:</label>
+                    <input id="login" type="text" placeholder="Enter login" autocomplete="off" class="form-control" name="username"/>
                 </div>
 
-                <a href="/logout" class="btn btn-primary" onclick="successfullyLogout()">Logout</a>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" placeholder="Enter your password" autocomplete="off" class="form-control" name="password"/>
+                </div>
 
-                <a href="/employees">Show employees</a>
+                <div th:if="${param.error}" style="color:red; margin-bottom:15px">
+                    ERROR: Invalid username or password!
+                </div>
+
+                <button class="btn btn-primary" type="submit" value="Sign In">Login</button>
+            </form>
+
+
+
         </div>
-
     </div>
 </div>
 
@@ -72,7 +79,6 @@
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/script.js}"></script>
 
 </body>
 </html>

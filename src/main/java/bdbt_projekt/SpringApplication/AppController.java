@@ -43,10 +43,8 @@ public class AppController implements WebMvcConfigurer {
 
         registry.addViewController("/languages").setViewName("languages");
         registry.addViewController("/data").setViewName("languages");
-        registry.addViewController("/employees").setViewName("employee");
+        registry.addViewController("/employees").setViewName("admin/employees");
         registry.addViewController("/nasz-zespol").setViewName("our-team");
-        registry.addViewController("/demo").setViewName("home-demo");
-        registry.addViewController("/login-demo").setViewName("login-demo");
     }
     @Controller
     public class DashboardController
@@ -64,22 +62,13 @@ public class AppController implements WebMvcConfigurer {
             List<Employee> employeeList = daoE.list();
             model.addAttribute("employeeList", employeeList);
 
-            List<Position> positionList = positionDAO.list();
-            HashMap<Integer, Position> positionDictonary = new HashMap<Integer, Position>();
-            positionList.forEach(position -> positionDictonary.put(position.getNr_stanowiska(), position));
-
             List<Office> officeList = officeDAO.list();
             HashMap<Integer, Office> officeDict = new HashMap<Integer, Office>();
             officeList.forEach(office -> officeDict.put(office.getNr_biura(), office));
 
-            employeeList = daoE.listAgents();
-
-            model.addAttribute("employeeAgentsList", employeeList);
-            model.addAttribute("positionList", positionDictonary);
             model.addAttribute("officeDict", officeDict);
 
-
-            return "employee";
+            return "admin/employees";
         }
         @RequestMapping("/employee/new")
         public String showNewEmployeeForm(Model model){

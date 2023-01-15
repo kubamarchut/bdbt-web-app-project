@@ -2,6 +2,7 @@ package bdbt_projekt.SpringApplication;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class EmployeeDAOTest extends Object {
 
     private EmployeeDAO dao;
+    private PositionDAO posDAO;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -25,6 +27,7 @@ class EmployeeDAOTest extends Object {
         dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
 
         dao = new EmployeeDAO(new JdbcTemplate(dataSource));
+        posDAO = new PositionDAO(new JdbcTemplate(dataSource));
     }
 
     @Test
@@ -37,9 +40,11 @@ class EmployeeDAOTest extends Object {
 
     @Test
     void save() {
+        Position newPosition = posDAO.list().get(0);
         Employee newEmployee = new Employee(0, "Jan", "Kowal", new Date(), "M",
                 "09876509876", new Date(), "123456789098765", "123456789",
-                "jan.kowal@domyidomki.pl", 1, 15, 3);
+                "jan.kowal@domyidomki.pl", 1, 15, newPosition);
+
 
         dao.save(newEmployee);
     }
@@ -56,5 +61,6 @@ class EmployeeDAOTest extends Object {
 
     @Test
     void delete() {
+        fail("Not yet implemented");
     }
 }

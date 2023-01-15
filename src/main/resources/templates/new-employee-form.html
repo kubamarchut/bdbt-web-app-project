@@ -53,7 +53,7 @@
                 <td>E-mail address</td>
                 <td><input type="text" th:field="*{adres_email}"></td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td>ID of office:</td>
                 <td>
                     <select th:field="*{nr_biura}">
@@ -64,7 +64,7 @@
                                 ></option>
                     </select>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <td>ID of address:</td>
                 <td><input type="number" th:field="*{nr_adresu}"></td>
@@ -73,7 +73,7 @@
             <tr>
                 <td>ID of position:</td>
                 <td>
-                    <select th:field="*{nr_stanowiska}">
+                    <select th:field="*{stanowisko}">
                         <option value="0">Please choose</option>
                         <option th:each="position : ${positionList}"
                                 th:value="${position.nr_stanowiska}"
@@ -90,5 +90,7 @@
             </table>
         </form>
     </div>
+
+    <script th:src="@{/js/pesel_handler.js}"></script>
 </body>
 </html>
