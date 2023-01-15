@@ -21,10 +21,45 @@ public class EmployeeDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
     public List<Employee> list(){
-        String sql = "SELECT * FROM PRACOWNICY";
+        String sql = "SELECT * FROM PRACOWNICY NATURAL JOIN STANOWISKA";
 
         List<Employee> listEmployee = jdbcTemplate.query(sql,
-                BeanPropertyRowMapper.newInstance(Employee.class));
+                (rs, arg1) -> {
+                    Employee employee = new Employee();
+                    Position position = new Position();
+                    Office office = new Office();
+
+                    employee.setNr_pracownika(rs.getInt("nr_pracownika"));
+                    employee.setImie(rs.getString("imie"));
+                    employee.setNazwisko(rs.getString("nazwisko"));
+                    employee.setData_urodzenia(rs.getDate("data_urodzenia"));
+                    employee.setPlec(rs.getString("plec"));
+                    employee.setPesel(rs.getString("pesel"));
+                    employee.setData_zatrudnienia(rs.getDate("data_zatrudnienia"));
+                    employee.setNr_konta(rs.getString("nr_konta"));
+                    employee.setNr_telefonu(rs.getString("nr_telefonu"));
+                    employee.setAdres_email(rs.getString("adres_email"));
+                    employee.setNr_adresu(rs.getInt("nr_adresu"));
+
+                    position.setNr_stanowiska(rs.getInt("nr_stanowiska"));
+                    position.setNazwa_stanowiska(rs.getString("nazwa_stanowiska"));
+                    position.setOpis(rs.getString("opis"));
+/*
+                    office.setNr_biura(rs.getInt("nr_biura"));
+                    office.setNazwa(rs.getString("nazwa"));
+                    office.setData_zalozenia(rs.getDate("data_zalozenia"));
+                    office.setNr_telefonu(rs.getString("nr_telefonu"));
+                    office.setAdres_email(rs.getString("adres_email"));
+                    office.setProcent_z_prowizji(rs.getInt("procent_z_prowizji"));
+                    office.setNr_adresu(rs.getInt("nr_adresu"));
+*/
+                    employee.setStanowisko(position);
+                    //                  employee.setBiuro(office);
+
+                    return employee;
+                });
+
+        //BeanPropertyRowMapper.newInstance(Employee.class));
 
         return listEmployee;
     }
