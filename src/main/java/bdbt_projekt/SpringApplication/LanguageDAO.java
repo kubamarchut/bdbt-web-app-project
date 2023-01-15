@@ -2,6 +2,7 @@ package bdbt_projekt.SpringApplication;
 
 import java.util.List;
 
+import bdbt_projekt.SpringApplication.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,6 +18,8 @@ public class LanguageDAO {
         super();
         this.jdbcTemplate = jdbcTemplate;
     }
+
+
     public List<Language> list(){
         String sql = "SELECT * FROM JEZYKI";
 
@@ -25,16 +28,24 @@ public class LanguageDAO {
 
         return listLanguage;
     }
+
+
     /* Insert – wstawianie nowego wiersza do bazy */
     public void save(Language sale) {
     }
+
+
     /* Read – odczytywanie danych z bazy */
     public Language get(int id) {
         return null;
     }
+
+
     /* Update – aktualizacja danych */
     public void update(Language language) {
     }
+
+
     /* Delete – wybrany rekord z danym id */
     public void delete(int id) {
     }
