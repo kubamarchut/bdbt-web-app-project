@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Edytowanie pracownika</title>
@@ -10,12 +10,13 @@
 </head>
 <body>
 <!-- Navigation -->
-<nav th:replace="fragments/nav :: nav('Employees')"></nav>
+<nav th:replace="fragments/nav :: nav('My-data')"></nav>
 <div class="container">
     <div class="row">
         <div class="col-md-12 mt-5">
             <div align="center">
-                <h1>Edytuj pracownika</h1>
+                <h1 sec:authorize="hasRole('ADMIN')">Edytuj pracownika</h1>
+                <h1 sec:authorize="hasRole('USER')">Edytuj swoje dane</h1>
 
                 <form action="#" th:action="@{/employee/update}" th:object="${employee}" method="post">
                     <table>

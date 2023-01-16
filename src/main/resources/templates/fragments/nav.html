@@ -16,8 +16,15 @@
           </a>
         </li>
 
-        <li th:class="${#strings.equals(activeLink, 'Employees')} ? 'nav-item active' : 'nav-item'">
+        <li sec:authorize="hasRole('ADMIN')" th:class="${#strings.equals(activeLink, 'Employees')} ? 'nav-item active' : 'nav-item'">
           <a class="nav-link" th:href="@{/employees}">Pracownicy</a>
+        </li>
+        <li sec:authorize="hasRole('USER')" th:class="${#strings.equals(activeLink, 'My-data')} ? 'nav-item active' : 'nav-item'">
+          <a class="nav-link" th:href="@{/employees}">Moje dane</a>
+        </li>
+
+        <li th:class="${#strings.equals(activeLink, 'Positions')} ? 'nav-item active' : 'nav-item'">
+          <a class="nav-link" th:href="@{/positions}">Stanowiska</a>
         </li>
 
         <li th:class="${#strings.equals(activeLink, 'Main')} ? 'nav-item active' : 'nav-item'">

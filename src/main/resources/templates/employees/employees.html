@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Employee data page</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
+    <link th:rel="stylesheet" th:href="@{/css/custom-checkbox.css} "/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+</head>
+
+<body th:style="'background: url(/assets/img/img.png) no-repeat center center fixed;'">
+
+
+<style th:inline="text">s
+    body{
+        background: url([[@{/assets/img/img.png}]])
+        no-repeat center center fixed;
+    }
+</style>
+
+
+<!-- Navigation -->
+<nav th:replace="fragments/nav :: nav('Employees')" ></nav>
+
+
+<!--Using images in page    -->
+<!-- <img th:src="@{/assets/img/img.png}" alt="Image" class="img-fluid"> -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            <div align="left">
+                <h1>Employee Records</h1>
+                <div class="control-panel">
+                    <div class="col-choose-wrapper">
+                        <button>show/hide columns</button>
+
+                        <div class="col-choose">
+
+                        </div>
+
+                    </div>
+                    <div class="row-search">
+                        <span></span>
+                        <input type="text" placeholder="search in column">
+                        <select id=""></select>
+                    </div>
+                </div>
+
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Imie</th>
+                        <th>Nazwisko</th>
+                        <th>Data urodzenia</th>
+                        <th>Płeć</th>
+                        <th>PESEL</th>
+                        <th>Data zatrudnienia</th>
+                        <th>Numer konta bankowego</th>
+                        <th>Numer telefonu</th>
+                        <th>Adres e-mail</th>
+                        <th>Biuro</th>
+                        <th>Stanowisko</th>
+                        <th>Numer address</th>
+                        <th class="actions">Akcje</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="employee : ${employeeList}">
+                        <td th:text="${employee.nr_pracownika}">ID</td>
+                        <td th:text="${employee.imie}">Name</td>
+                        <td th:text="${employee.nazwisko}">Lastname</td>
+                        <td th:text="${employee.data_urodzenia}">date of birth</td>
+                        <td th:text="${employee.plec}">Sex</td>
+                        <td th:text="${employee.pesel}">PESEL</td>
+                        <td th:text="${employee.data_zatrudnienia}">date of employment</td>
+                        <td th:text="${employee.nr_konta}">Bank account</td>
+                        <td th:text="${employee.nr_telefonu}">Phone number</td>
+                        <td th:text="${employee.adres_email}">E-mail address</td>
+                        <td th:text="${employee.biuro.nazwa}">Office</td>
+                        <td th:text="${employee.stanowisko.nazwa_stanowiska}"
+                            th:title="${employee.stanowisko.opis}"
+                        >Position</td>
+                        <td th:text="${employee.nr_adresu}">ID of address</td>
+                        <td class="actions">
+                            <a th:href="@{'/employee/edit/' + ${employee.nr_pracownika}}">
+                                <span class="material-symbols-outlined">edit</span>
+                            </a>
+                            <a th:href="@{'/employee/delete/' + ${employee.nr_pracownika}}">
+                                <span class="material-symbols-outlined">delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+                <section class="add-new-employee-wrapper">
+                    <a class="hero-link" href="/employee/new">
+                        <span>Dodaj nowego pracownika</span>
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deletePrevention" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Czy na pewno chcesz usunąć?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Czy jesteś pewny, że chcesz usunąć ten rekord?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Tak</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/table_headers.js}"></script>
+<script th:src="@{/js/stop-delete.js}"></script>
+
+</body>
+</html>
+

@@ -2,6 +2,8 @@ package bdbt_projekt.SpringApplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,35 +45,40 @@ public class AppController implements WebMvcConfigurer {
 
         registry.addViewController("/languages").setViewName("languages");
         registry.addViewController("/data").setViewName("languages");
-        registry.addViewController("/employees").setViewName("admin/employees");
+        registry.addViewController("/employees").setViewName("employees/employees");
         registry.addViewController("/nasz-zespol").setViewName("our-team");
     }
+
     @Controller
-    public class DashboardController
-    {
+    public class DashboardController {
 
         @RequestMapping("/languages")
-        public String showLanguagesPage(Model model){
+        public String showLanguagesPage(Model model) {
             List<Language> languageList = dao.list();
             model.addAttribute("languageList", languageList);
 
             return "languages";
         }
+
+        // Handling employees
         @RequestMapping("/employees")
-        public String showEmployeesPage(Model model){
-            List<Employee> employeeList = daoE.list();
-            model.addAttribute("employeeList", employeeList);
+        public String showEmployeesPage(HttpServletRequest request, @AuthenticationPrincipal User user, Model model) {
+            if (request.isUserInRole("USER")) {
+                return "redirect:/employee/edit/" + user.getUsername();
+            }
+            else if (request.isUserInRole("ADMIN")) {
+                List<Employee> employeeList = daoE.list();
+                model.addAttribute("employeeList", employeeList);
+                return "employees/employees";
+            }
+            else{
+                return "index";
+            }
 
-            List<Office> officeList = officeDAO.list();
-            HashMap<Integer, Office> officeDict = new HashMap<Integer, Office>();
-            officeList.forEach(office -> officeDict.put(office.getNr_biura(), office));
-
-            model.addAttribute("officeDict", officeDict);
-
-            return "admin/employees";
         }
+
         @RequestMapping("/employee/new")
-        public String showNewEmployeeForm(Model model){
+        public String showNewEmployeeForm(Model model) {
             Employee newEmployee = new Employee();
             List<Position> positionList = positionDAO.list();
             List<Office> officeList = officeDAO.list();
@@ -80,17 +87,19 @@ public class AppController implements WebMvcConfigurer {
             model.addAttribute("positionList", positionList);
             model.addAttribute("officeList", officeList);
 
-            return "new-employee-form";
+            return "employees/new-employee-form";
         }
+
         @RequestMapping(value = "/employee/save", method = RequestMethod.POST)
-        public String saveEmployee(@ModelAttribute("newEmployee") Employee newEmployee){
+        public String saveEmployee(@ModelAttribute("newEmployee") Employee newEmployee) {
             daoE.save(newEmployee);
 
             return "redirect:/employees";
         }
+
         @RequestMapping(value = "/employee/edit/{id}")
-        public ModelAndView showEditEmployeeForm(@PathVariable(name = "id") int id){
-            ModelAndView mav = new ModelAndView("edit-employee-form");
+        public ModelAndView showEditEmployeeForm(@PathVariable(name = "id") int id) {
+            ModelAndView mav = new ModelAndView("employees/edit-employee-form");
             List<Position> positionList = positionDAO.list();
             List<Office> officeList = officeDAO.list();
             Employee newEmployee = daoE.get(id);
@@ -101,36 +110,92 @@ public class AppController implements WebMvcConfigurer {
 
             return mav;
         }
+
         @RequestMapping(value = "/employee/update", method = RequestMethod.POST)
-        public String updateEmployee(@ModelAttribute("newEmployee") Employee newEmployee){
+        public String updateEmployee(@ModelAttribute("newEmployee") Employee newEmployee) {
             daoE.update(newEmployee);
 
             return "redirect:/employees";
         }
+
         @RequestMapping(value = "/employee/delete/{id}")
-        public String deleteEmployee(@PathVariable(name = "id") int id){
+        public String deleteEmployee(@PathVariable(name = "id") int id) {
             daoE.delete(id);
 
             return "redirect:/employees";
         }
+
+        // Handling positions
+        @RequestMapping("/positions")
+        public String showPositionsPage(Model model) {
+            List<Position> positionList = positionDAO.list();
+            model.addAttribute("positionList", positionList);
+
+            return "positions/positions";
+        }
+
+        @RequestMapping("/position/new")
+        public String showNewPositionForm(Model model) {
+            Position newPosition = new Position();
+
+            model.addAttribute("newPosition", newPosition);
+
+            return "positions/new-position-form";
+        }
+
+        @RequestMapping(value = "/position/save", method = RequestMethod.POST)
+        public String savePosition(@ModelAttribute("newPosition") Position newPosition) {
+            positionDAO.save(newPosition);
+
+            return "redirect:/positions";
+        }
+
+        @RequestMapping(value = "/position/edit/{id}")
+        public ModelAndView showEditPositionForm(@PathVariable(name = "id") int id) {
+            ModelAndView mav = new ModelAndView("positions/edit-position-form");
+            Position newPosition = positionDAO.get(id);
+
+            mav.addObject("position", newPosition);
+
+            return mav;
+        }
+
+        @RequestMapping(value = "/position/update", method = RequestMethod.POST)
+        public String updatePosition(@ModelAttribute("newPosition") Position newPosition) {
+            positionDAO.update(newPosition);
+
+            return "redirect:/positions";
+        }
+
+        @RequestMapping(value = "/position/delete/{id}")
+        public String deletePosition(@PathVariable(name = "id") int id) {
+            positionDAO.delete(id);
+
+            return "redirect:/positions";
+        }
+
         @RequestMapping("/estate-agent/{agentID}")
-        public ModelAndView showAgentsPage (@PathVariable(value="agentID") int id) {
+        public ModelAndView showAgentsPage(@PathVariable(value = "agentID") int id) {
             ModelAndView agentsPage = new ModelAndView("agents_page");
-            if (!daoE.checkIfRealEstateAgent(id)) throw new ResponseStatusException(NOT_FOUND, "Unable to find resource");
+            if (!daoE.checkIfRealEstateAgent(id))
+                throw new ResponseStatusException(NOT_FOUND, "Unable to find resource");
             Employee employee = daoE.get(id);
 
             agentsPage.addObject("employee", employee);
             return agentsPage;
         }
+
         @RequestMapping("/estate-agent/name/{agentName}")
-        public ModelAndView showAgentsPage (@PathVariable(value="agentName") String agentName) {
+        public ModelAndView showAgentsPage(@PathVariable(value = "agentName") String agentName) {
             ModelAndView agentsPage = new ModelAndView("agents_page");
-            if (!daoE.checkIfRealEstateAgent(agentName)) throw new ResponseStatusException(NOT_FOUND, "Unable to find resource");
+            if (!daoE.checkIfRealEstateAgent(agentName))
+                throw new ResponseStatusException(NOT_FOUND, "Unable to find resource");
             Employee employee = daoE.get(agentName);
 
             agentsPage.addObject("employee", employee);
             return agentsPage;
         }
+
         @RequestMapping
                 ("/main"
                 )
@@ -140,22 +205,20 @@ public class AppController implements WebMvcConfigurer {
             (request.isUserInRole
                     ("ADMIN")) {
                 return "redirect:/main_admin";
-            }
-            else if
+            } else if
             (request.isUserInRole
                             ("USER")) {
                 return "redirect:/main_user";
-            }
-            else
-            {
+            } else {
                 return "redirect:/index";
             }
         }
+
         @RequestMapping("/nasz-zespol")
-        public String showOurTeamPage(Model model){
+        public String showOurTeamPage(Model model) {
             List<Employee> employeeList = daoE.listAgents();
             Map<Integer, List> employeesLanguages = new HashMap<Integer, List>();
-            for (Employee employee: employeeList) {
+            for (Employee employee : employeeList) {
                 List<Language> employeeLanguages = daoE.getEmployeesLanguages(employee.getNr_pracownika());
                 employeesLanguages.put(employee.getNr_pracownika(), employeeLanguages);
             }
@@ -165,11 +228,13 @@ public class AppController implements WebMvcConfigurer {
             return "our-team";
         }
     }
-    @RequestMapping(value={"/main_admin"})
+
+    @RequestMapping(value = {"/main_admin"})
     public String showAdminPage(Model model) {
         return "admin/main_admin";
     }
-    @RequestMapping(value={"/main_user"})
+
+    @RequestMapping(value = {"/main_user"})
     public String showUserPage(Model model) {
         return "user/main_user";
     }

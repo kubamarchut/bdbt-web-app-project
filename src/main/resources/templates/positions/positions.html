@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title>Employee data page</title>
+    <title>Stanowiska</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
@@ -23,7 +23,7 @@
 
 
 <!-- Navigation -->
-<nav th:replace="fragments/nav :: nav('Employees')" ></nav>
+<nav th:replace="fragments/nav :: nav('Positions')" ></nav>
 
 
 <!--Using images in page    -->
@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-md-12 mt-5">
             <div align="left">
-                <h1>Employee Records</h1>
+                <h1>Wpisy w tabeli stanowiska</h1>
                 <div class="control-panel">
                     <div class="col-choose-wrapper">
                         <button>show/hide columns</button>
@@ -56,45 +56,23 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Imie</th>
-                        <th>Nazwisko</th>
-                        <th>Data urodzenia</th>
-                        <th>Płeć</th>
-                        <th>PESEL</th>
-                        <th>Data zatrudnienia</th>
-                        <th>Numer konta bankowego</th>
-                        <th>Numer telefonu</th>
-                        <th>Adres e-mail</th>
-                        <th>Biuro</th>
-                        <th>Stanowisko</th>
-                        <th>Numer address</th>
-                        <th class="actions">Akcje</th>
+                        <th>Nazwa</th>
+                        <th>Opis</th>
+                        <th sec:authorize="hasRole('ADMIN')" class="actions">Akcje</th>
 
                     </tr>
                     </thead>
 
                     <tbody>
-                    <tr th:each="employee : ${employeeList}">
-                        <td th:text="${employee.nr_pracownika}">ID</td>
-                        <td th:text="${employee.imie}">Name</td>
-                        <td th:text="${employee.nazwisko}">Lastname</td>
-                        <td th:text="${employee.data_urodzenia}">date of birth</td>
-                        <td th:text="${employee.plec}">Sex</td>
-                        <td th:text="${employee.pesel}">PESEL</td>
-                        <td th:text="${employee.data_zatrudnienia}">date of employment</td>
-                        <td th:text="${employee.nr_konta}">Bank account</td>
-                        <td th:text="${employee.nr_telefonu}">Phone number</td>
-                        <td th:text="${employee.adres_email}">E-mail address</td>
-                        <td th:text="${officeDict.get(employee.nr_biura).nazwa}">Office</td>
-                        <td th:text="${employee.stanowisko.nazwa_stanowiska}"
-                            th:title="${employee.stanowisko.opis}"
-                        >Position</td>
-                        <td th:text="${employee.nr_adresu}">ID of address</td>
-                        <td class="actions">
-                            <a th:href="@{'/employee/edit/' + ${employee.nr_pracownika}}">
+                    <tr th:each="position : ${positionList}">
+                        <td th:text="${position.nr_stanowiska}">ID</td>
+                        <td th:text="${position.nazwa_stanowiska}">Nazwa</td>
+                        <td th:text="${position.opis}">Opis</td>
+                        <td sec:authorize="hasRole('ADMIN')" class="actions">
+                            <a th:href="@{'/position/edit/' + ${position.nr_stanowiska}}">
                                 <span class="material-symbols-outlined">edit</span>
                             </a>
-                            <a th:href="@{'/employee/delete/' + ${employee.nr_pracownika}}">
+                            <a th:href="@{'/position/delete/' + ${position.nr_stanowiska}}">
                                 <span class="material-symbols-outlined">delete</span>
                             </a>
                         </td>
@@ -102,9 +80,9 @@
                     </tbody>
 
                 </table>
-                <section class="add-new-employee-wrapper">
-                    <a class="hero-link" href="/employee/new">
-                        <span>Dodaj nowego pracownika</span>
+                <section sec:authorize="hasRole('ADMIN')" class="add-new-employee-wrapper">
+                    <a class="hero-link" href="/position/new">
+                        <span>Dodaj nowe stanowisko</span>
                     </a>
                 </section>
             </div>

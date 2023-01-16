@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -50,8 +51,15 @@ public class PositionDAO {
 
     /* Update – aktualizacja danych */
     public void update(Position position) {
+        String sql = "UPDATE STANOWISKA SET nazwa_stanowiska=:nazwa_stanowiska, opis=:opis WHERE nr_stanowiska=:nr_stanowiska";
+        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(position);
+        NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
+
+        template.update(sql, param);
     }
     /* Delete – wybrany rekord z danym id */
     public void delete(int id) {
+        String sql ="DELETE FROM STANOWISKA WHERE nr_stanowiska = ?";
+        jdbcTemplate.update(sql, id);
     }
 }
