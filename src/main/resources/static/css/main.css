@@ -308,7 +308,17 @@ mark {
     font-width: 700;
     text-transform: uppercase;
 }
-
+a.btn-primary{
+    background: #B38356;
+    border: #B38356;
+}
+a.btn-primary:hover, a.btn-primary:hover, a.btn-primary:focus, a.btn-primary:active{
+    background: #705336 !important;
+    border: #705336 !important;
+}
+a.btn-primary:focus{
+    box-shadow: 0 0 0 0.2rem #70533666 !important;
+}
 .module-links-wrapper {
     display: flex;
     flex-direction: row;

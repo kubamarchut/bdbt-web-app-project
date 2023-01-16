@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 @Component("userSecurity")
 public class UserSecurity {
     public boolean hasUserId(Authentication authentication, Long userId) {
+
         return authentication.getName().equals(userId.toString());
     }
 }

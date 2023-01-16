@@ -2,6 +2,8 @@ package bdbt_projekt.SpringApplication;
 
 import bdbt_projekt.SpringApplication.Position;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -9,6 +11,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Repository
@@ -58,8 +62,15 @@ public class PositionDAO {
         template.update(sql, param);
     }
     /* Delete – wybrany rekord z danym id */
-    public void delete(int id) {
-        String sql ="DELETE FROM STANOWISKA WHERE nr_stanowiska = ?";
-        jdbcTemplate.update(sql, id);
+    public void delete(int id) throws RecordIsConnetedException {
+        try{
+            String sql ="DELETE FROM STANOWISKA WHERE nr_stanowiska = ?";
+            jdbcTemplate.update(sql, id);
+        }
+        catch(DataIntegrityViolationException exception){
+            System.out.println(exception);
+            throw new RecordIsConnetedException();
+        }
+
     }
 }

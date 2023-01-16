@@ -48,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/employee/delete/**").access("hasRole('ADMIN')")
                 .antMatchers("/employee/new").access("hasRole('ADMIN')")
                 .antMatchers("/employee/save").access("hasRole('ADMIN')")
-                .antMatchers("/employee/edit/{userId}").access("@userSecurity.hasUserId(authentication, #userId)")
+                .antMatchers("/employee/edit/{userId}").access("@userSecurity.hasUserId(authentication, #userId) or hasRole('ADMIN')")
                 .antMatchers("/employee/update").authenticated()
 
                 .antMatchers("/positions").authenticated()

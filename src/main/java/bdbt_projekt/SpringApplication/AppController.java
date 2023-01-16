@@ -47,6 +47,7 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/data").setViewName("languages");
         registry.addViewController("/employees").setViewName("employees/employees");
         registry.addViewController("/nasz-zespol").setViewName("our-team");
+        registry.addViewController("/errors/record-connected").setViewName("/errors/record-connected");
     }
 
     @Controller
@@ -169,9 +170,13 @@ public class AppController implements WebMvcConfigurer {
 
         @RequestMapping(value = "/position/delete/{id}")
         public String deletePosition(@PathVariable(name = "id") int id) {
-            positionDAO.delete(id);
-
-            return "redirect:/positions";
+            try{
+                positionDAO.delete(id);
+                return "redirect:/positions";
+            }
+            catch(RecordIsConnetedException e){
+                return "/errors/record-connected";
+            }
         }
 
         @RequestMapping("/estate-agent/{agentID}")

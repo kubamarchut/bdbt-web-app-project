@@ -1,33 +1,39 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Error Page</title>
+    <title>Błąd</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
 <body>
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">BDBT Spring Boot Project - Part II</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</nav>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 mt-5">
-            <form method="post" th:action="@{/index}">
-                <div class="form-group">
-                    <div><b><p style="font-size:30px">Error</p></b></div>
-                    <div><p style="font-size:24px">An unexpected error has occurred</p></div>
-                </div>
-                <button class="btn btn-primary" type="submit" value="Sign In">Back to home page</button>
-            </form>
-        </div>
+<style>
+    body > div{
+        height: 100vh;
+    }
+    h1.display-1{
+        font-weight: 900;
+        font-family: monospace;
+    }
+    a.btn-primary{
+        background: #B38356;
+        border: #B38356;
+    }
+    a.btn-primary:hover, a.btn-primary:hover, a.btn-primary:focus, a.btn-primary:active{
+        background: #705336 !important;
+        border: #705336 !important;
+    }
+    a.btn-primary:focus{
+        box-shadow: 0 0 0 0.2rem #70533666;
+    }
+</style>
+<div class="d-flex align-items-center justify-content-center">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold">Błąd</h1>
+        <p class="fs-3"> <span class="text-danger">Opps!</span> występił nieoczekiwany błąd</p>
+        <p class="lead">
+            Wystąpił błąd, który uniemożliwia przetworzenie tego zapytania.
+        </p>
+        <a href="/" class="btn btn-primary">Wróć na stronę główną</a>
     </div>
 </div>
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
