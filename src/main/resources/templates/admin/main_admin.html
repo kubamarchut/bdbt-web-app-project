@@ -2,9 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Main Admin Page</title>
+    <title>Strona główna admina</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
 
 </head>
 <body>
@@ -52,19 +53,28 @@
     <div class="row">
 
         <div class="col-md-10 mt-5">
-                <div class="form-group">
-                    <label style="font-size:30px" th:inline="text">Welcome <a
-                            style="color:lightskyblue; text-transform:capitalize"><b>[[${#httpServletRequest.remoteUser}]]</b></a>
-                        to the main page!</label>
-                    <div style="font-size:20px">If you want to logout, click "Logout" button under this text.</div>
-                </div>
+            <div class="form-group">
+                <label style="font-size:30px" th:inline="text">Witaj <a
+                        style="color:lightskyblue; text-transform:capitalize"><b>[[${#httpServletRequest.remoteUser}]]</b></a>
+                    na stronie głównej!</label>
+                <div style="font-size:20px">Jeśli chcesz się wylogować kliknij na przycisk poniżej</div>
+            </div>
 
-                <a href="/logout" class="btn btn-primary" onclick="successfullyLogout()">Logout</a>
-
-                <a href="/employees">Zarządzaj pracownikami</a>
-                <a href="/positions">Zarządzaj stanowiskami</a>
+            <a href="/logout" class="btn btn-primary" onclick="successfullyLogout()">Wyloguj</a>
         </div>
-
+        <section class="col-12 mt-4 available-actions">
+            <h2>Dostępne moduły</h2>
+            <div class="module-links-wrapper">
+                <a href="/employees">
+                    <img th:src="@{/img/employees.jpg}" alt="pracownicy">
+                    <span>Zarządzaj pracownikami</span>
+                </a>
+                <a href="/positions">
+                    <img th:src="@{/img/positions.jpg}" alt="stanowiska">
+                    <span>Zarządzaj stanowiskami</span>
+                </a>
+            </div>
+        </section>
     </div>
 </div>
 

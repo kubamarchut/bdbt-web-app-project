@@ -5,7 +5,7 @@
     <title>Main User Page</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-
+    <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
 </head>
 <body>
 
@@ -55,12 +55,25 @@
                 <div class="form-group">
                     <label style="font-size:30px" th:inline="text">Witaj <a
                             style="color:lightskyblue; text-transform:capitalize"><b>[[${#httpServletRequest.remoteUser}]]</b></a>
-                        na stronie głównej</label>
+                        na stronie głównej!</label>
                     <div style="font-size:20px">Jeśli chcesz się wylogować kliknij na przycisk poniżej</div>
                 </div>
 
                 <a href="/logout" class="btn btn-primary" onclick="successfullyLogout()">Wyloguj</a>
         </div>
+        <section class="col-12 mt-4 available-actions">
+            <h2>Dostępne moduły</h2>
+            <div class="module-links-wrapper">
+                <a href="/employees">
+                    <img th:src="@{/img/personal.jpg}" alt="pracownicy">
+                    <span>Zarządzaj swoimi danymi</span>
+                </a>
+                <a href="/positions">
+                    <img th:src="@{/img/positions.jpg}" alt="stanowiska">
+                    <span>Przeglądaj stanowiska</span>
+                </a>
+            </div>
+        </section>
 
     </div>
 </div>
