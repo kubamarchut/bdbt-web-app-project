@@ -62,15 +62,10 @@ public class PositionDAO {
         template.update(sql, param);
     }
     /* Delete – wybrany rekord z danym id */
-    public void delete(int id) throws RecordIsConnetedException {
-        try{
+    public void delete(int id)  {
             String sql ="DELETE FROM STANOWISKA WHERE nr_stanowiska = ?";
             jdbcTemplate.update(sql, id);
-        }
-        catch(DataIntegrityViolationException exception){
-            System.out.println(exception);
-            throw new RecordIsConnetedException();
-        }
+
 
     }
 }

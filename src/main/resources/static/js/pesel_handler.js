@@ -14,7 +14,7 @@ function decodePesel(pesel){
         month = month - 80;
     }
     else{
-        while(month > 20){
+        while(month >= 20){
             month -= 20;
             year += 100;
         }

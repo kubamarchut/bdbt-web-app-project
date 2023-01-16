@@ -170,13 +170,8 @@ public class AppController implements WebMvcConfigurer {
 
         @RequestMapping(value = "/position/delete/{id}")
         public String deletePosition(@PathVariable(name = "id") int id) {
-            try{
-                positionDAO.delete(id);
-                return "redirect:/positions";
-            }
-            catch(RecordIsConnetedException e){
-                return "/errors/record-connected";
-            }
+            positionDAO.delete(id);
+            return "redirect:/positions";
         }
 
         @RequestMapping("/estate-agent/{agentID}")

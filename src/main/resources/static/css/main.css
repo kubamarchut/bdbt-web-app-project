@@ -316,8 +316,11 @@ a.btn-primary:hover, a.btn-primary:hover, a.btn-primary:focus, a.btn-primary:act
     background: #705336 !important;
     border: #705336 !important;
 }
-a.btn-primary:focus{
+a.btn-primary:active, a.btn-primary:focus{
     box-shadow: 0 0 0 0.2rem #70533666 !important;
+}
+nav a.btn-primary{
+    color: #fff !important;
 }
 .module-links-wrapper {
     display: flex;
@@ -358,4 +361,8 @@ a.btn-primary:focus{
 
 .module-links-wrapper a:hover img {
     transform: scale(1.25);
+}
+input:focus:invalid, input.wrong{
+    border: none;
+    outline: 2px solid red;
 }

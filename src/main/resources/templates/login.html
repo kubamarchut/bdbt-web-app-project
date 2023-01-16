@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link th:rel="stylesheet" th:href="@{/css/login-page.css} "/>
-  <title>Login demo</title>
+  <title>Strona logowania</title>
 </head>
 <body>
   <div class="login-wrapper">
@@ -17,7 +17,7 @@
     <label for="password">Hasło</label><br>
     <input type="password" id="password" name="password"><br>
     <div th:if="${param.error}" style="color:red; margin-bottom:15px">
-      ERROR: Invalid username or password!
+      Wystąpił błąd! nie prawidłowe hasło lub login
     </div>
     <button type="submit">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
