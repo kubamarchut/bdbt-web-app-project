@@ -115,10 +115,13 @@ public class Employee {
         this.nr_stanowiska = stanowisko.getNr_stanowiska();
     }
     public Position getStanowisko() {
-        return stanowisko;
+        return this.stanowisko;
     }
     public int getNr_stanowiska() {
-        return stanowisko.getNr_stanowiska();
+        return this.nr_stanowiska;
+    }
+    public void setNr_stanowiska(int nr_stanowiska) {
+        this.nr_stanowiska = nr_stanowiska;
     }
     public void setBiuro(Office biuro) {
         this.biuro = biuro;
@@ -128,7 +131,10 @@ public class Employee {
         return this.biuro;
     }
     public int getNr_biura() {
-        return this.biuro.getNr_biura();
+        return this.nr_biura;
+    }
+    public void setNr_biura(int nr_biura) {
+        this.nr_biura = nr_biura;
     }
 
 
@@ -137,7 +143,7 @@ public class Employee {
     public Employee(){
     }
 
-    public Employee(int nr_pracownika, String imie, String nazwisko, Date data_urodzenia, String plec, String pesel, Date data_zatrudnienia, String nr_konta, String nr_telefonu, String adres_email, Office biuro, int nr_adresu, Position stanowisko) {
+    /*public Employee(int nr_pracownika, String imie, String nazwisko, Date data_urodzenia, String plec, String pesel, Date data_zatrudnienia, String nr_konta, String nr_telefonu, String adres_email, Office biuro, int nr_adresu, Position stanowisko) {
         this.nr_pracownika = nr_pracownika;
         this.imie = imie;
         this.nazwisko = nazwisko;
@@ -153,6 +159,23 @@ public class Employee {
         this.nr_adresu = nr_adresu;
         this.stanowisko = stanowisko;
         this.nr_stanowiska = stanowisko.getNr_stanowiska();
+    }*/
+    public Employee(int nr_pracownika, String imie, String nazwisko, Date data_urodzenia, String plec, String pesel, Date data_zatrudnienia, String nr_konta, String nr_telefonu, String adres_email, int nr_biura, int nr_adresu, int nr_stanowiska) {
+        this.nr_pracownika = nr_pracownika;
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.data_urodzenia = data_urodzenia;
+        this.plec = plec;
+        this.pesel = pesel;
+        this.data_zatrudnienia = data_zatrudnienia;
+        this.nr_konta = nr_konta;
+        this.nr_telefonu = nr_telefonu;
+        this.adres_email = adres_email;
+        //this.biuro = biuro;
+        this.nr_biura = nr_biura;
+        this.nr_adresu = nr_adresu;
+        //this.stanowisko = stanowisko;
+        this.nr_stanowiska = nr_stanowiska;
     }
 
     @Override
@@ -169,8 +192,10 @@ public class Employee {
                 ", nr_telefonu='" + nr_telefonu + '\'' +
                 ", adres_email='" + adres_email + '\'' +
                 ", nr_biura=" + nr_biura +
+                ", biuro=" + biuro +
                 ", nr_adresu=" + nr_adresu +
                 ", stanowisko=" + stanowisko +
+                ", nr_stanowiska=" + nr_stanowiska +
                 '}';
     }
 }

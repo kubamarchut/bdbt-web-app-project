@@ -88,6 +88,31 @@ public class AppController implements WebMvcConfigurer {
 
             return "redirect:/employees";
         }
+        @RequestMapping(value = "/employee/edit/{id}")
+        public ModelAndView showEditEmployeeForm(@PathVariable(name = "id") int id){
+            ModelAndView mav = new ModelAndView("edit-employee-form");
+            List<Position> positionList = positionDAO.list();
+            List<Office> officeList = officeDAO.list();
+            Employee newEmployee = daoE.get(id);
+
+            mav.addObject("positionList", positionList);
+            mav.addObject("officeList", officeList);
+            mav.addObject("employee", newEmployee);
+
+            return mav;
+        }
+        @RequestMapping(value = "/employee/update", method = RequestMethod.POST)
+        public String updateEmployee(@ModelAttribute("newEmployee") Employee newEmployee){
+            daoE.update(newEmployee);
+
+            return "redirect:/employees";
+        }
+        @RequestMapping(value = "/employee/delete/{id}")
+        public String deleteEmployee(@PathVariable(name = "id") int id){
+            daoE.delete(id);
+
+            return "redirect:/employees";
+        }
         @RequestMapping("/estate-agent/{agentID}")
         public ModelAndView showAgentsPage (@PathVariable(value="agentID") int id) {
             ModelAndView agentsPage = new ModelAndView("agents_page");

@@ -36,6 +36,31 @@ table td, table th{
 table td{
 
 }
+.actions{
+    background: #62462D;
+    color: #fff;
+    position: sticky;
+    right: 0;
+    text-align: center  ;
+}
+td.actions a{
+    transition: .2s color ease-in-out;
+    color: #fff;
+}
+td.actions a span{
+    transition: .3s transform cubic-bezier(.4,0,.5,1.6);
+}
+td.actions a:hover{
+    text-decoration: none;
+    color: #c4c4c4;
+    transform: rotate(10deg);
+}
+td.actions a:hover span{
+    transform: rotate(-10deg);
+}
+td.actions a:nth-of-type(2):hover span{
+    transform: rotate(10deg);
+}
 section.add-new-employee-wrapper{
     display: block;
     text-align: center;
@@ -61,6 +86,7 @@ a.hero-link::before{
 a.hero-link:hover{
     background: #705336;
 }
+
 .meet-team{
     font-family: 'Comfortaa', cursive;
     text-align: center;
@@ -225,4 +251,16 @@ mark{
     padding: .2em 0;
     color: #fff;
     background: #DB5ABA;
+}
+.submit-new{
+    padding: 0;
+}
+.submit-new button{
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: #B38356;
+    color: #fff;
+    font-width: 700;
+    text-transform: uppercase;
 }

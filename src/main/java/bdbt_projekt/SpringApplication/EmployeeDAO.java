@@ -1,15 +1,15 @@
 package bdbt_projekt.SpringApplication;
 
-import bdbt_projekt.SpringApplication.Employee;
-import bdbt_projekt.SpringApplication.Language;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -85,8 +85,6 @@ public class EmployeeDAO {
     }
     /* Insert – wstawianie nowego wiersza do bazy */
     public void save(Employee employee) {
-
-        System.out.print(employee);
         SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
         insertActor.withTableName("pracownicy").usingColumns("imie", "nazwisko", "data_urodzenia", "plec",
                                                                 "pesel", "data_zatrudnienia", "nr_konta", "nr_telefonu",
@@ -98,10 +96,43 @@ public class EmployeeDAO {
     /* Read – odczytywanie danych z bazy */
     public Employee get(int id) {
         Object[] args = {id};
-        String sql = "SELECT * FROM PRACOWNICY WHERE NR_PRACOWNIKA = ?";
+        String sql = "SELECT * FROM PRACOWNICY NATURAL JOIN STANOWISKA NATURAL JOIN (select nr_biura, nazwa, data_zalozenia, nr_telefonu as nr_telefonu_biura, adres_email as adres_email_biura, procent_z_prowizji, nr_adresu as nr_adresu_biura from biura) WHERE NR_PRACOWNIKA = ?";
 
         Employee employee = jdbcTemplate.queryForObject(sql, args,
-                BeanPropertyRowMapper.newInstance(Employee.class));
+                (rs, arg1) -> {
+                    Employee newEmployee = new Employee();
+                    Position position = new Position();
+                    Office office = new Office();
+
+                    newEmployee.setNr_pracownika(rs.getInt("nr_pracownika"));
+                    newEmployee.setImie(rs.getString("imie"));
+                    newEmployee.setNazwisko(rs.getString("nazwisko"));
+                    newEmployee.setData_urodzenia(rs.getDate("data_urodzenia"));
+                    newEmployee.setPlec(rs.getString("plec"));
+                    newEmployee.setPesel(rs.getString("pesel"));
+                    newEmployee.setData_zatrudnienia(rs.getDate("data_zatrudnienia"));
+                    newEmployee.setNr_konta(rs.getString("nr_konta"));
+                    newEmployee.setNr_telefonu(rs.getString("nr_telefonu"));
+                    newEmployee.setAdres_email(rs.getString("adres_email"));
+                    newEmployee.setNr_adresu(rs.getInt("nr_adresu"));
+
+                    position.setNr_stanowiska(rs.getInt("nr_stanowiska"));
+                    position.setNazwa_stanowiska(rs.getString("nazwa_stanowiska"));
+                    position.setOpis(rs.getString("opis"));
+
+                    office.setNr_biura(rs.getInt("nr_biura"));
+                    office.setNazwa(rs.getString("nazwa"));
+                    office.setData_zalozenia(rs.getDate("data_zalozenia"));
+                    office.setNr_telefonu(rs.getString("nr_telefonu"));
+                    office.setAdres_email(rs.getString("adres_email"));
+                    office.setProcent_z_prowizji(rs.getInt("procent_z_prowizji"));
+                    office.setNr_adresu(rs.getInt("nr_adresu"));
+
+                    newEmployee.setStanowisko(position);
+                    newEmployee.setBiuro(office);
+
+                    return newEmployee;
+                });
 
         return employee;
     }
@@ -140,9 +171,19 @@ public class EmployeeDAO {
     }
 
     /* Update – aktualizacja danych */
-    public void update(Language sale) {
+    public void update(Employee employee) {
+        String sql = "UPDATE PRACOWNICY SET imie=:imie, nazwisko=:nazwisko,data_urodzenia=:data_urodzenia, plec=:plec, " +
+                "pesel=:pesel ,data_zatrudnienia=:data_zatrudnienia ,nr_konta=:nr_konta ,nr_telefonu=:nr_telefonu ," +
+                "adres_email=:adres_email ,nr_biura=:nr_biura ,nr_adresu=:nr_adresu, " +
+                "nr_stanowiska=:nr_stanowiska WHERE nr_pracownika=:nr_pracownika";
+        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(employee);
+        NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
+
+        template.update(sql, param);
     }
     /* Delete – wybrany rekord z danym id */
     public void delete(int id) {
+        String sql ="DELETE FROM PRACOWNICY WHERE nr_pracownika = ?";
+        jdbcTemplate.update(sql, id);
     }
 }

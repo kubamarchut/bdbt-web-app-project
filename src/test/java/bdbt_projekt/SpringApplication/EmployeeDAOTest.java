@@ -10,8 +10,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeDAOTest extends Object {
 
@@ -40,10 +39,9 @@ class EmployeeDAOTest extends Object {
 
     @Test
     void save() {
-        Position newPosition = posDAO.list().get(0);
         Employee newEmployee = new Employee(0, "Jan", "Kowal", new Date(), "M",
                 "09876509876", new Date(), "123456789098765", "123456789",
-                "jan.kowal@domyidomki.pl", 1, 15, newPosition);
+                "jan.kowal@domyidomki.pl", 1, 15, 3);
 
 
         dao.save(newEmployee);
@@ -51,16 +49,32 @@ class EmployeeDAOTest extends Object {
 
     @Test
     void get() {
-        fail("Not yet implemented");
+        int id = 3;
+        Employee newEmployee = dao.get(id);
+        System.out.println(newEmployee);
+        assertNotNull(newEmployee);
     }
 
     @Test
     void update() {
-        fail("Not yet implemented");
+        int id = 3;
+        Employee newEmployee = dao.get(id);
+        String oldName = newEmployee.getImie();
+        newEmployee.setImie("Grzegorz");
+
+        dao.update(newEmployee);
+        newEmployee = dao.get(id);
+
+        assertNotEquals(newEmployee.getImie(), oldName);
     }
 
     @Test
     void delete() {
-        fail("Not yet implemented");
+        int nOfRecords = dao.list().size();
+        int id = 24;
+        dao.delete(24);
+        int newNOfRecords = dao.list().size();
+
+        assertEquals(nOfRecords - 1, newNOfRecords);
     }
 }

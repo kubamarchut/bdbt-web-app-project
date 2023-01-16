@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Dodawanie nowego pracownika</title>
+    <title>Edytowanie pracownika</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <link th:rel="stylesheet" th:href="@{/css/main.css} "/>
@@ -15,15 +15,19 @@
     <div class="row">
         <div class="col-md-12 mt-5">
             <div align="center">
-                <h1>Dodaj nowego pracownika</h1>
+                <h1>Edytuj pracownika</h1>
 
-                <form action="#" th:action="@{/employee/save}" th:object="${newEmployee}" method="post">
+                <form action="#" th:action="@{/employee/update}" th:object="${employee}" method="post">
                     <table>
                         <tr>
                             <th colspan="2">
                                 <h3>Dane osobowe:</h3>
                             </th>
                         </tr>
+                            <tr>
+                                <td>Numer pracownika:</td>
+                                <td><input type="number" th:field="*{nr_pracownika}" readonly="readonly"></td>
+                            </tr>
                             <tr>
                                 <td>Imie:</td>
                                 <td><input type="text" th:field="*{imie}"></td>

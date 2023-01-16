@@ -62,7 +62,7 @@ tableHeaders.forEach((header, index) =>{
     newOption.value = index;
     newOption.innerHTML = header;
 
-    rowSearchSelect.appendChild(newOption);
+    if(header != "Akcje")rowSearchSelect.appendChild(newOption);
 })
 
 rowSearchInput.addEventListener("input", search);
