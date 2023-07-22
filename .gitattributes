@@ -1,1 +1,4 @@
 src/main/resources/templates/* linguist-vendored
+src/main/resources/templates/fragments/* linguist-vendored
+src/main/resources/templates/errors/* linguist-vendored
+src/main/resources/templates/admin/* linguist-vendored
